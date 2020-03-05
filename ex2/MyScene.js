@@ -25,13 +25,21 @@ class MyScene extends CGFscene {
         this.cube = new MyUnitCube(this);
         this.quad = new MyQuad(this);
         this.cubequad = new MyUnitCubeQuad(this);
+        this.table = new MyTable(this);
+        this.chair = new MyChair(this);
+        this.first_chair = new MyChair(this);
+        this.second_chair = new MyChair(this);
+        this.third_chair = new MyChair(this);
+        this.fourth_chair = new MyChair(this);
 
         //Objects connected to MyInterface
         this.displayAxis = true;
-        this.displayTangram = true;
-        this.displayCube = true;
-        this.displayQuad = true;
-        this.displayCubeQuad=true;
+        this.displayTangram = false;
+        this.displayCube = false;
+        this.displayQuad = false;
+        this.displayCubeQuad=false;
+        this.displayTable=false;
+        this.displayChair=false;
         this.scaleFactor = 1;
     }
     initLights() {
@@ -100,6 +108,41 @@ class MyScene extends CGFscene {
         if(this.displayCubeQuad){
             this.cubequad.display();
         }
+        if(this.displayTable){
+            this.table.display();
+        }
+        /*if(this.displayChair){
+            this.chair.display();
+        }*/
+
+        this.pushMatrix();
+        this.translate(0,0,-6.5);
+        if(this.displayChair)
+            this.first_chair.display();
+        this.popMatrix();
+
+        this.pushMatrix();
+        this.rotate(Math.PI,0,1,0);
+        this.translate(0,0,-6.5);
+        if(this.displayChair)
+            this.second_chair.display();
+        this.popMatrix();
+
+        this.pushMatrix();
+        this.rotate(Math.PI/2,0,1,0);
+        this.translate(0,0,-6.5);
+        if(this.displayChair)
+            this.third_chair.display();
+        this.popMatrix();
+
+        this.pushMatrix();
+        this.rotate(-Math.PI/2,0,1,0);
+        this.translate(0,0,-6.5);
+        if(this.displayChair)
+            this.fourth_chair.display();
+        this.popMatrix();
+
+        
         // ---- END Primitive drawing section
     }
 }
