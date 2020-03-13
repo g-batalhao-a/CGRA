@@ -14,7 +14,6 @@ class MyTangram extends CGFobject {
         this.redTriangle = new MyTriangleSmall(this.scene);
         this.blueTriangle = new MyTriangleBig(this.scene);
         this.pinkTriangle = new MyTriangle(this.scene);
-        this.objects = [this.baseSquare, this.triangle, this.paralelogram, this.triangleBig, this.triangleSmall];
     }
     initMaterials(scene) {
         //green color
