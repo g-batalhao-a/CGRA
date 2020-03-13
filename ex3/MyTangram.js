@@ -140,58 +140,25 @@ class MyTangram extends CGFobject {
         this.pinkTriangle.display();
         this.scene.popMatrix();
 
-        this.normals = [
-            this.baseSquare.normals[0],
-            this.baseSquare.normals[1],
-            this.baseSquare.normals[2],
-            this.baseSquare.normals[3],
-            this.baseSquare.normals[4],
-            this.baseSquare.normals[5],
-            this.baseSquare.normals[6],
-            this.baseSquare.normals[7],
-            this.orangeTriangle.normals[0],
-            this.orangeTriangle.normals[1],
-            this.orangeTriangle.normals[2],
-            this.orangeTriangle.normals[3],
-            this.orangeTriangle.normals[4],
-            this.orangeTriangle.normals[5],
-            this.purpleTriangle.normals[0],
-            this.purpleTriangle.normals[1],
-            this.purpleTriangle.normals[2],
-            this.purpleTriangle.normals[3],
-            this.purpleTriangle.normals[4],
-            this.purpleTriangle.normals[5],
-            this.redTriangle.normals[0],
-            this.redTriangle.normals[1],
-            this.redTriangle.normals[2],
-            this.redTriangle.normals[3],
-            this.redTriangle.normals[4],
-            this.redTriangle.normals[5],
-            this.yellowParallelogram.normals[0],
-            this.yellowParallelogram.normals[1],
-            this.yellowParallelogram.normals[2],
-            this.yellowParallelogram.normals[3],
-            this.yellowParallelogram.normals[4],
-            this.yellowParallelogram.normals[5],
-            this.yellowParallelogram.normals[6],
-            this.yellowParallelogram.normals[7],
-            this.blueTriangle.normals[0],
-            this.blueTriangle.normals[1],
-            this.blueTriangle.normals[2],
-            this.blueTriangle.normals[3],
-            this.blueTriangle.normals[4],
-            this.blueTriangle.normals[5],
-            this.pinkTriangle.normals[0],
-            this.pinkTriangle.normals[1],
-            this.pinkTriangle.normals[2],
-            this.pinkTriangle.normals[3],
-            this.pinkTriangle.normals[4],
-            this.pinkTriangle.normals[5],
-		];
+        
     }
-    updateBuffers(complexity){
-        // reinitialize buffers
-        this.initBuffers();
-        this.initNormalVizBuffers();
-    }
+    enableNormalViz(){
+        this.baseSquare.enableNormalViz();
+        this.orangeTriangle.enableNormalViz();
+        this.purpleTriangle.enableNormalViz();
+        this.redTriangle.enableNormalViz(); 
+        this.yellowParallelogram.enableNormalViz();
+        this.blueTriangle.enableNormalViz();
+        this.pinkTriangle.enableNormalViz();
+    };
+
+    disableNormalViz(){
+        this.baseSquare.disableNormalViz();
+        this.orangeTriangle.disableNormalViz();
+        this.purpleTriangle.disableNormalViz();
+        this.redTriangle.disableNormalViz();
+        this.yellowParallelogram.disableNormalViz();
+        this.blueTriangle.disableNormalViz();
+        this.pinkTriangle.disableNormalViz();
+    };
 }
