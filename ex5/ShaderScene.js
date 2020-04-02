@@ -81,7 +81,11 @@ class ShaderScene extends CGFscene {
 		this.testShaders[5].setUniformsValues({ uSampler2: 1 });
 		this.testShaders[6].setUniformsValues({ uSampler2: 1 });
 		this.testShaders[6].setUniformsValues({ timeFactor: 0 });
-		this.texturewatertex.bind(1);
+
+		this.testShaders[11].setUniformsValues({uSampler2: 1});
+		this.testShaders[11].setUniformsValues({ uSampler1: 2 });
+		this.testShaders[11].setUniformsValues({ uSampler2: 3 });
+		this.testShaders[11].setUniformsValues({ timeFactor: 0});
 
 		// Shaders interface variables
 
@@ -180,6 +184,8 @@ class ShaderScene extends CGFscene {
 		// only shader 6 is using time factor
 		if (this.selectedExampleShader == 6)
 			this.testShaders[6].setUniformsValues({ timeFactor: t / 100 % 1000 });
+		if (this.selectedExampleShader == 11)
+			this.testShaders[11].setUniformsValues({timeFactor: t / 100 % 1000});
 	}
 
 	// main display function
@@ -211,6 +217,8 @@ class ShaderScene extends CGFscene {
 
 		// bind additional texture to texture unit 1
 		this.texture2.bind(1);
+		this.texturewatertex.bind(2);
+		this.texturewatertex.bind(3);
 
 		if (this.selectedObject==0) {
 			// teapot (scaled and rotated to conform to our axis)
