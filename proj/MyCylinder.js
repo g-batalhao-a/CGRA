@@ -57,7 +57,7 @@ class MyCylinder extends CGFobject {
 
     }
 
-    updateBuffers(complexity){
+    updateSlices(complexity){
       this.slices = complexity; //complexity varies 0-50
 
       // reinitialize buffers

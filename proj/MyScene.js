@@ -24,12 +24,13 @@ class MyScene extends CGFscene {
         this.enableTextures(true);
 
         this.slices=16;
+        this.stacks=8;
         
         //Initialize scene objects
         this.axis = new CGFaxis(this);
 
         this.objects=[
-            new MySphere(this, 16, 8),
+            new MySphere(this, this.slices, this.stacks),
             new MyCylinder(this, this.slices)
         ];
         this.objectList={
@@ -89,7 +90,11 @@ class MyScene extends CGFscene {
     }
 
     updateSlices(){
-        this.objects[this.currentObject].updateBuffers(this.slices);
+        this.objects[this.currentObject].updateSlices(this.slices);
+    }
+
+    updateStacks(){
+        this.objects[this.currentObject].updateStacks(this.stacks);
     }
 
     display() {

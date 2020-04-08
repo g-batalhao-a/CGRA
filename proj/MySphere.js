@@ -30,6 +30,11 @@ class MySphere extends CGFobject {
     var thetaInc = (2 * Math.PI) / this.longDivs;
     var latVertices = this.longDivs + 1;
 
+    var textmaplongitude=0;
+    var textmaplatitude=0;
+    var textmaplongpart = 1/this.longDivs;
+    var textmaplatpart= 1/this.latDivs;
+
     // build an all-around stack at a time, starting on "north pole" and proceeding "south"
     for (let latitude = 0; latitude <= this.latDivs; latitude++) {
       var sinPhi = Math.sin(phi);
@@ -37,12 +42,17 @@ class MySphere extends CGFobject {
 
       // in each stack, build all the slices around, starting on longitude 0
       theta = 0;
+      textmaplongitude=0;
+
       for (let longitude = 0; longitude <= this.longDivs; longitude++) {
         //--- Vertices coordinates
         var x = Math.cos(theta) * sinPhi;
         var y = cosPhi;
         var z = Math.sin(-theta) * sinPhi;
         this.vertices.push(x, y, z);
+        
+        //TexCoords
+        this.texCoords.push(textmaplongitude,textmaplatitude);
 
         //--- Indices
         if (latitude < this.latDivs && longitude < this.longDivs) {
@@ -65,15 +75,27 @@ class MySphere extends CGFobject {
         theta += thetaInc;
 
         //--- Texture Coordinates
-        // To be done... 
-        // May need some additional code also in the beginning of the function.
-        
+        textmaplongitude+=textmaplongpart;
       }
       phi += phiInc;
+      textmaplatitude+=textmaplatpart;
     }
 
 
     this.primitiveType = this.scene.gl.TRIANGLES;
     this.initGLBuffers();
+  }
+  updateSlices(complexity){
+    this.longDivs=complexity;
+
+    // reinitialize buffers
+    this.initBuffers();
+    this.initNormalVizBuffers();
+  }
+  updateStacks(complexity){
+    this.latDivs=complexity*2;
+    // reinitialize buffers
+    this.initBuffers();
+    this.initNormalVizBuffers();
   }
 }

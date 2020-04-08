@@ -23,6 +23,7 @@ class MyInterface extends CGFinterface {
         this.gui.add(this.scene,'currentTexture',this.scene.textureList).onChange(this.scene.updateTexture.bind(this.scene)).name('Texture');
         //Sliders elements
         this.gui.add(this.scene,'slices',0,100,1).onChange(this.scene.updateSlices.bind(this.scene)).name('Number of Slices');
+        this.gui.add(this.scene,'stacks',0,100,1).onChange(this.scene.updateStacks.bind(this.scene)).name('Number of Stacks');
         return true;
     }
 }
