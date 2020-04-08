@@ -65,7 +65,9 @@ class MyUnitCubeQuad extends CGFobject {
         this.bot.setTextureWrap('REPEAT', 'REPEAT');
     }
 	display() {
-
+        this.scene.pushMatrix();
+        this.scene.scale(50,50,50);
+        
         this.front.apply();
         // Front
         this.scene.pushMatrix();
@@ -113,6 +115,8 @@ class MyUnitCubeQuad extends CGFobject {
         this.quad.display();
         this.scene.popMatrix();
 
+        
+        this.scene.popMatrix();
     }
     enableNormalViz(){
         this.quad.enableNormalViz()
