@@ -31,16 +31,19 @@ class MyScene extends CGFscene {
 
         this.objects=[
             new MySphere(this, this.slices, this.stacks),
-            new MyCylinder(this, this.slices)
+            new MyCylinder(this, this.slices),
+            new MyUnitCubeQuad(this)
         ];
         this.objectList={
             'Sphere' : 0,
             'Cylinder': 1,
+            'Cube':2
         };
 
         //Objects connected to MyInterface
         this.displayAxis = true;
         this.displayObject = false;
+        this.displayNormals = false;
         this.currentTexture=-1;
         this.currentObject=0;
         //Material
@@ -55,11 +58,13 @@ class MyScene extends CGFscene {
         //Textures
         this.textures=[
             new CGFtexture(this,'images/earth.jpg'),
-            new CGFtexture(this,'images/cubemap.jpg')
+            new CGFtexture(this,'images/cubemap.jpg'),
+            new CGFtexture(this,'images/desert.png'),
         ];
         this.textureList={
             'Earth':0,
             'Cubemap':1,
+            'Desert':2,
         };
     }
     initLights() {
@@ -81,7 +86,11 @@ class MyScene extends CGFscene {
         this.objects[this.currentObject];
     }
     updateTexture(){
-        this.material.setTexture(this.textures[this.currentTexture])
+        if(this.currentObject!=2)
+            this.material.setTexture(this.textures[this.currentTexture]);
+        else{
+            this.objects[this.currentObject].updateTexture();
+        }
     }
 
     // called periodically (as per setUpdatePeriod() in init())
@@ -121,7 +130,11 @@ class MyScene extends CGFscene {
 
         //This sphere does not have defined texture coordinates
         //this.incompleteSphere.display();
-
+        if (this.displayNormals)
+            this.objects[this.currentObject].enableNormalViz();
+        else
+            this.objects[this.currentObject].disableNormalViz();
+        
         if (this.displayObject)
             this.objects[this.currentObject].display();
 
