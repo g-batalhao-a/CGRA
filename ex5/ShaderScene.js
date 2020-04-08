@@ -218,7 +218,7 @@ class ShaderScene extends CGFscene {
 		// bind additional texture to texture unit 1
 		this.texture2.bind(1);
 		this.texturewatertex.bind(2);
-		this.texturewatertex.bind(3);
+		this.texturewatermap.bind(3);
 
 		if (this.selectedObject==0) {
 			// teapot (scaled and rotated to conform to our axis)

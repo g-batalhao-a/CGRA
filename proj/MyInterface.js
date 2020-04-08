@@ -18,9 +18,11 @@ class MyInterface extends CGFinterface {
 
         //Checkbox element in GUI
         this.gui.add(this.scene, 'displayAxis').name('Display Axis');
-
-        this.gui.add(this.scene, 'displayCylinder').name('Display Cylinder');
-
+        this.gui.add(this.scene, 'displayObject').name('Display Object');
+        this.gui.add(this.scene,'currentObject',this.scene.objectList).onChange(this.scene.updateObject.bind(this.scene)).name('Object');
+        this.gui.add(this.scene,'currentTexture',this.scene.textureList).onChange(this.scene.updateTexture.bind(this.scene)).name('Texture');
+        //Sliders elements
+        this.gui.add(this.scene,'slices',0,100,1).onChange(this.scene.updateSlices.bind(this.scene)).name('Number of Slices');
         return true;
     }
 }

@@ -23,14 +23,43 @@ class MyScene extends CGFscene {
         
         this.enableTextures(true);
 
+        this.slices=16;
+        
         //Initialize scene objects
         this.axis = new CGFaxis(this);
-        this.incompleteSphere = new MySphere(this, 16, 8);
-        this.cylinder = new MyCylinder(this, 16);
+
+        this.objects=[
+            new MySphere(this, 16, 8),
+            new MyCylinder(this, this.slices)
+        ];
+        this.objectList={
+            'Sphere' : 0,
+            'Cylinder': 1,
+        };
 
         //Objects connected to MyInterface
         this.displayAxis = true;
-        this.displayCylinder = false;
+        this.displayObject = false;
+        this.currentTexture=-1;
+        this.currentObject=0;
+        //Material
+        this.material=new CGFappearance(this);
+        this.material.setAmbient(0.1,0.1,0.1,1);
+        this.material.setDiffuse(0.9,0.9,0.9,1);
+        this.material.setDiffuse(0.2,0.2,0.2,1);
+        this.material.setShininess(10);
+        this.material.loadTexture('images/earth.jpg');
+        this.material.setTextureWrap('REPEAT','REPEAT');
+
+        //Textures
+        this.textures=[
+            new CGFtexture(this,'images/earth.jpg'),
+            new CGFtexture(this,'images/cubemap.jpg')
+        ];
+        this.textureList={
+            'Earth':0,
+            'Cubemap':1,
+        };
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -47,9 +76,20 @@ class MyScene extends CGFscene {
         this.setSpecular(0.2, 0.4, 0.8, 1.0);
         this.setShininess(10.0);
     }
+    updateObject(){
+        this.objects[this.currentObject];
+    }
+    updateTexture(){
+        this.material.setTexture(this.textures[this.currentTexture])
+    }
+
     // called periodically (as per setUpdatePeriod() in init())
     update(t){
         //To be done...
+    }
+
+    updateSlices(){
+        this.objects[this.currentObject].updateBuffers(this.slices);
     }
 
     display() {
@@ -63,6 +103,7 @@ class MyScene extends CGFscene {
         // Apply transformations corresponding to the camera position relative to the origin
         this.applyViewMatrix();
         
+        //this.cylinderSlices=this.cylinderSlices;
         // Draw axis
         if (this.displayAxis)
             this.axis.display();
@@ -71,11 +112,13 @@ class MyScene extends CGFscene {
 
         // ---- BEGIN Primitive drawing section
 
+        this.material.apply();
+
         //This sphere does not have defined texture coordinates
         //this.incompleteSphere.display();
 
-        if (this.displayCylinder)
-            this.cylinder.display();
+        if (this.displayObject)
+            this.objects[this.currentObject].display();
 
         // ---- END Primitive drawing section
     }
