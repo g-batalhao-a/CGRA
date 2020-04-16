@@ -129,12 +129,12 @@ class MyScene extends CGFscene {
 
         if(keysPressed){
             console.log(text);
-            this.vehicle.update();
         }
     }
     // called periodically (as per setUpdatePeriod() in init())
     update(t){
         this.checkKeys();
+        this.vehicle.update();
         //To be done...
     }
 
