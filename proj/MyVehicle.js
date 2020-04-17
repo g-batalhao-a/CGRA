@@ -96,6 +96,10 @@ class MyVehicle extends CGFobject {
     }
     
     display(){
+        this.scene.setDiffuse(0,0,1);
+        this.scene.setSpecular(0, 0, 0, 1);
+        this.scene.setAmbient(0, 0, 0.5, 1);
+        
         this.scene.pushMatrix();
 
         this.scene.translate(this.x_pos, this.y_pos, this.z_pos);

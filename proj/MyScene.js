@@ -170,7 +170,7 @@ class MyScene extends CGFscene {
         // ---- BEGIN Primitive drawing section
         this.pushMatrix();
 
-        this.material.apply();
+        
 
         //This sphere does not have defined texture coordinates
         //this.incompleteSphere.display();
@@ -179,8 +179,10 @@ class MyScene extends CGFscene {
         else
             this.objects[this.currentObject].disableNormalViz();
         
-        if (this.displayObject)
+        if (this.displayObject){
+            this.material.apply();
             this.objects[this.currentObject].display();
+        }
 
         if(this.displayVehicle){
             this.scale(this.scaleFactor,this.scaleFactor,this.scaleFactor);
