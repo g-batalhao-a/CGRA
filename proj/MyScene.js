@@ -52,7 +52,7 @@ class MyScene extends CGFscene {
         this.scaleFactor=1;
         //Material
         this.material=new CGFappearance(this);
-        this.material.setAmbient(0.1,0.1,0.1,1);
+        this.material.setAmbient(0.7,0.7,0.7,1);
         this.material.setDiffuse(0.9,0.9,0.9,1);
         this.material.setDiffuse(0.2,0.2,0.2,1);
         this.material.setShininess(10);

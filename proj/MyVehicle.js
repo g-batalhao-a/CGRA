@@ -7,12 +7,18 @@ class MyVehicle extends CGFobject {
         super(scene);
         this.slices = slices;
         this.stacks = stacks;
+        this.sphere= new MySphere(this.scene, this.slices, this.stacks);
+        this.cylinder= new MyCylinder(this.scene, this.slices);
+        this.quad = new MyQuadDSided(this.scene);
+        this.triangle = new MyTriangle(this.scene);
         this.initBuffers();
 
         this.angle_y=0;
         this.speed=0;
         this.x_pos=0;this.y_pos=0;this.z_pos=0;
+
     }
+    /*
     initBuffers() {
         this.vertices = [];
         this.indices = [];
@@ -64,11 +70,11 @@ class MyVehicle extends CGFobject {
 
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();
-    }
+    }*/
     
     updateBuffers(complexity){
         this.slices = 3 + Math.round(9 * complexity); //complexity varies 0-10, so slices varies 3-93
-
+        this.stacks = 3 + Math.round(9*complexity);
         // reinitialize buffers
         this.initBuffers();
         this.initNormalVizBuffers();
@@ -99,17 +105,119 @@ class MyVehicle extends CGFobject {
         this.scene.setDiffuse(0,0,1);
         this.scene.setSpecular(0, 0, 0, 1);
         this.scene.setAmbient(0, 0, 0.5, 1);
-        
+
+        //Blimp balloon
         this.scene.pushMatrix();
-
-        this.scene.translate(this.x_pos, this.y_pos, this.z_pos);
-        this.scene.rotate(this.angle_y*Math.PI/180.0, 0, 1, 0);
-
-        this.scene.translate(0,0,-1);
+        this.scene.scale(0.5,0.5,1);
+        this.sphere.display();
+        this.scene.popMatrix();
+        
+        //Cockpit
+        this.scene.pushMatrix();
+        this.scene.translate(0,-0.45,0);
+        this.scene.scale(0.10,0.10,1.1);
+        this.scene.translate(0,0,-0.5);
         this.scene.rotate(90.0*Math.PI/180.0, 1, 0, 0);
-        super.display();
+        this.cylinder.display();
+        this.scene.popMatrix();
+
+        //Ends of the cockpit
+        this.scene.pushMatrix();
+        this.scene.translate(0,-0.45,0.563);
+        this.scene.scale(0.10,0.10,0.10);
+        this.sphere.display();
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+        this.scene.translate(0,-0.45,-0.563);
+        this.scene.scale(0.10,0.10,0.10);
+        this.sphere.display();
+        this.scene.popMatrix();
+
+        //Engine
+        this.scene.pushMatrix();
+        this.scene.translate(0.1,-0.48,-0.58);
+        this.scene.scale(0.05,0.05,0.1);
+        this.sphere.display();
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+        this.scene.translate(-0.1,-0.48,-0.58);
+        this.scene.scale(0.05,0.05,0.1);
+        this.sphere.display();
+        this.scene.popMatrix();
+
+
+        //Flight Control Surfaces
+        this.scene.pushMatrix();
+        this.scene.rotate(90.0*Math.PI/180.0, 0, 0, 1);
+
+        this.scene.pushMatrix();
+        this.scene.translate(-0.35,0,-1.12);
+        this.scene.rotate(90.0*Math.PI/180.0, 1, 0, 0);
+        this.scene.scale(0.4,0.4,0.4);
+        this.quad.display();
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+        this.scene.translate(-0.35,0,-0.92);
+        this.scene.scale(0.141,0.141,0.141);
+        this.scene.rotate(135.0*Math.PI/180.0, 0, 1, 0);
+        this.scene.rotate(90.0*Math.PI/180.0, 1, 0, 0);
+        this.triangle.display();
+        this.scene.popMatrix();
+
+
+        this.scene.pushMatrix();
+        this.scene.translate(0.35,0,-1.12);
+        this.scene.rotate(90.0*Math.PI/180.0, 1, 0, 0);
+        this.scene.scale(0.4,0.4,0.4);
+        this.quad.display();
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+        this.scene.translate(0.35,0,-0.92);
+        this.scene.scale(0.141,0.141,0.141);
+        this.scene.rotate(135.0*Math.PI/180.0, 0, 1, 0);
+        this.scene.rotate(90.0*Math.PI/180.0, 1, 0, 0);
+        this.triangle.display();
+        this.scene.popMatrix();
 
         this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+        this.scene.translate(-0.35,0,-1.12);
+        this.scene.rotate(90.0*Math.PI/180.0, 1, 0, 0);
+        this.scene.scale(0.4,0.4,0.4);
+        this.quad.display();
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+        this.scene.translate(-0.35,0,-0.92);
+        this.scene.scale(0.141,0.141,0.141);
+        this.scene.rotate(135.0*Math.PI/180.0, 0, 1, 0);
+        this.scene.rotate(90.0*Math.PI/180.0, 1, 0, 0);
+        this.triangle.display();
+        this.scene.popMatrix();
+
+
+        this.scene.pushMatrix();
+        this.scene.translate(0.35,0,-1.12);
+        this.scene.rotate(90.0*Math.PI/180.0, 1, 0, 0);
+        this.scene.scale(0.4,0.4,0.4);
+        this.quad.display();
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+        this.scene.translate(0.35,0,-0.92);
+        this.scene.scale(0.141,0.141,0.141);
+        this.scene.rotate(135.0*Math.PI/180.0, 0, 1, 0);
+        this.scene.rotate(90.0*Math.PI/180.0, 1, 0, 0);
+        this.triangle.display();
+        this.scene.popMatrix();
+
+
+
     }
 
     
