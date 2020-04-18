@@ -97,30 +97,38 @@ class MyScene extends CGFscene {
             this.objects[this.currentObject].updateTexture();
         }
     }
-    checkKeys(){
+    checkKeys(t){
         var text="Keys pressed: ";
         var keysPressed=false;
 
-        if(this.gui.isKeyPressed("KeyW")){
-            text+=" W ";
-            this.vehicle.accelerate(0.3*this.speedFactor);
+        if(this.gui.isKeyPressed("KeyP")){
+            text+=" P ";
+            this.vehicle.setAutomatic();
             keysPressed=true;
         }
-        if(this.gui.isKeyPressed("KeyS")){
-            text+=" S ";
-            this.vehicle.accelerate(-0.3*this.speedFactor);
-            keysPressed=true;
+        if(!this.vehicle.automatic){
+            if(this.gui.isKeyPressed("KeyW")){
+                text+=" W ";
+                this.vehicle.accelerate(0.3*this.speedFactor);
+                keysPressed=true;
+            }
+            if(this.gui.isKeyPressed("KeyS")){
+                text+=" S ";
+                this.vehicle.accelerate(-0.3*this.speedFactor);
+                keysPressed=true;
+            }
+            if(this.gui.isKeyPressed("KeyA")){
+                text+=" A ";
+                this.vehicle.turn(5);
+                keysPressed=true;
+            }
+            if(this.gui.isKeyPressed("KeyD")){
+                text+=" D ";
+                this.vehicle.turn(-5);
+                keysPressed=true;
+            }
         }
-        if(this.gui.isKeyPressed("KeyA")){
-            text+=" A ";
-            this.vehicle.turn(5);
-            keysPressed=true;
-        }
-        if(this.gui.isKeyPressed("KeyD")){
-            text+=" D ";
-            this.vehicle.turn(-5);
-            keysPressed=true;
-        }
+        
         if (this.gui.isKeyPressed("KeyR")) {
             text+=" R "
             this.vehicle.reset();
@@ -131,12 +139,13 @@ class MyScene extends CGFscene {
             console.log(text);
         }
         else{
-            this.vehicle.turn(0);
+            if(!this.vehicle.automatic)
+                this.vehicle.turn(0);
         }
     }
     // called periodically (as per setUpdatePeriod() in init())
     update(t){
-        this.checkKeys();
+        this.checkKeys(t);
         this.vehicle.update(t);
         //To be done...
     }

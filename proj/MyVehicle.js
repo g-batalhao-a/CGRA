@@ -21,6 +21,12 @@ class MyVehicle extends CGFobject {
         this.speed=0;
         this.x_pos=0;this.y_pos=0;this.z_pos=0;
 
+
+        this.automatic=false;
+        this.time=0;
+        this.slope=0;
+        this.center_x=0;this.center_z=0;
+
     }
     /*
     initBuffers() {
@@ -88,10 +94,25 @@ class MyVehicle extends CGFobject {
     }
 
     update(t){
-        this.x_pos += this.speed * Math.sin(this.angle_y*Math.PI/180);
-        this.z_pos += this.speed * Math.cos(this.angle_y*Math.PI/180);
+        if(this.automatic){
+            this.time=t / 1000 % 1000;
+            this.radius=5;
+            this.speed=2*Math.PI/5;
+            this.angle_y=this.time*72;
+            this.finvert1.setAngle(-this.speed*5);
+            this.finvert2.setAngle(-this.speed*5);
+            this.x_pos=this.radius*Math.sin(this.time*this.speed)+this.center_x;
+            this.z_pos = this.radius * Math.cos(this.time*this.speed)+this.center_z;
+        }
+        else{
+            this.x_pos += this.speed * Math.sin(this.angle_y*Math.PI/180);
+            this.z_pos += this.speed * Math.cos(this.angle_y*Math.PI/180);
+        }
+        
         this.propeller1.setAngle(this.speed*t);
         this.propeller2.setAngle(-this.speed*t);
+        
+        
     }
 
     turn(v) {
@@ -111,10 +132,38 @@ class MyVehicle extends CGFobject {
         this.z_pos = 0;
         this.speed = 0;
         this.angle_y = 0;
+        this.automatic=false;
+
+    }
+
+    setAutomatic(){
+        this.automatic=!this.automatic;
+        if(!this.automatic){
+            this.reset();
+        }
+        else{
+            this.time=0;
+            if(Math.sin(this.angle_y*Math.PI/180)==0){
+                this.center_x=this.x_pos+5;
+                this.center_z=this.z_pos;
+            }
+            else if(Math.cos(this.angle_y*Math.PI/180)==0){
+                this.center_z=this.z_pos+5;
+                this.center_x=this.x_pos;
+            }
+            else{
+                this.slope=(this.speed * Math.cos(this.angle_y*Math.PI/180))/(this.speed * Math.sin(this.angle_y*Math.PI/180));
+                this.center_x=this.x_pos-Math.sqrt(25/(1+1/Math.pow(this.slope,2)));
+                this.center_z=this.slope*(this.center_x-this.x_pos)+this.z_pos;
+            }
+            console.log(this.center_x);
+            console.log(this.center_z);
+        }
+        
+        
     }
     
     display(){
-        this.timeFactor=this.scene.t / 100 % 1000;
 
         this.scene.setDiffuse(0,0,1);
         this.scene.setSpecular(0, 0, 0, 1);
