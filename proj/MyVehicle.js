@@ -9,8 +9,12 @@ class MyVehicle extends CGFobject {
         this.stacks = stacks;
         this.sphere= new MySphere(this.scene, this.slices, this.stacks);
         this.cylinder= new MyCylinder(this.scene, this.slices);
-        this.quad = new MyQuadDSided(this.scene);
-        this.triangle = new MyTriangle(this.scene);
+        this.propeller1 = new MyPropeller(this.scene);
+        this.propeller2 = new MyPropeller(this.scene);
+        this.finhor1= new MyFin(this.scene);
+        this.finhor2= new MyFin(this.scene);
+        this.finvert1= new MyFin(this.scene);
+        this.finvert2= new MyFin(this.scene);
         this.initBuffers();
 
         this.angle_y=0;
@@ -75,18 +79,26 @@ class MyVehicle extends CGFobject {
     updateBuffers(complexity){
         this.slices = 3 + Math.round(9 * complexity); //complexity varies 0-10, so slices varies 3-93
         this.stacks = 3 + Math.round(9*complexity);
+        this.sphere.updateSlices(this.slices);
+        this.sphere.updateStacks(this.stacks);
+        this.cylinder.updateSlices(this.slices);
         // reinitialize buffers
         this.initBuffers();
         this.initNormalVizBuffers();
     }
 
-    update(){
+    update(t){
         this.x_pos += this.speed * Math.sin(this.angle_y*Math.PI/180);
         this.z_pos += this.speed * Math.cos(this.angle_y*Math.PI/180);
+        this.propeller1.setAngle(this.speed*t);
+        this.propeller2.setAngle(-this.speed*t);
     }
 
     turn(v) {
         this.angle_y += v;
+        this.finvert1.setAngle(-v*5);
+        this.finvert2.setAngle(-v*5);
+        
     }
 
     accelerate(v) {
@@ -102,10 +114,14 @@ class MyVehicle extends CGFobject {
     }
     
     display(){
+        this.timeFactor=this.scene.t / 100 % 1000;
+
         this.scene.setDiffuse(0,0,1);
         this.scene.setSpecular(0, 0, 0, 1);
         this.scene.setAmbient(0, 0, 0.5, 1);
-
+        this.scene.pushMatrix();
+        this.scene.translate(this.x_pos, this.y_pos, this.z_pos);
+        this.scene.rotate(this.angle_y*Math.PI/180.0, 0, 1, 0);
         //Blimp balloon
         this.scene.pushMatrix();
         this.scene.scale(0.5,0.5,1);
@@ -114,8 +130,8 @@ class MyVehicle extends CGFobject {
         
         //Cockpit
         this.scene.pushMatrix();
-        this.scene.translate(0,-0.45,0);
-        this.scene.scale(0.10,0.10,1.1);
+        this.scene.translate(0,-0.5,0);
+        this.scene.scale(0.10,0.10,0.6);
         this.scene.translate(0,0,-0.5);
         this.scene.rotate(90.0*Math.PI/180.0, 1, 0, 0);
         this.cylinder.display();
@@ -123,28 +139,38 @@ class MyVehicle extends CGFobject {
 
         //Ends of the cockpit
         this.scene.pushMatrix();
-        this.scene.translate(0,-0.45,0.563);
+        this.scene.translate(0,-0.5,0.3);
         this.scene.scale(0.10,0.10,0.10);
         this.sphere.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
-        this.scene.translate(0,-0.45,-0.563);
+        this.scene.translate(0,-0.5,-0.3);
         this.scene.scale(0.10,0.10,0.10);
         this.sphere.display();
         this.scene.popMatrix();
 
         //Engine
         this.scene.pushMatrix();
-        this.scene.translate(0.1,-0.48,-0.58);
-        this.scene.scale(0.05,0.05,0.1);
+        this.scene.translate(0.09,-0.51,-0.37);
+        this.scene.scale(0.025,0.025,0.05);
         this.sphere.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
-        this.scene.translate(-0.1,-0.48,-0.58);
-        this.scene.scale(0.05,0.05,0.1);
+        this.scene.translate(0.09,-0.51,-0.42);
+        this.propeller1.display();
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+        this.scene.translate(-0.09,-0.51,-0.37);
+        this.scene.scale(0.025,0.025,0.05);
         this.sphere.display();
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+        this.scene.translate(-0.09,-0.51,-0.42);
+        this.propeller2.display();
         this.scene.popMatrix();
 
 
@@ -153,69 +179,29 @@ class MyVehicle extends CGFobject {
         this.scene.rotate(90.0*Math.PI/180.0, 0, 0, 1);
 
         this.scene.pushMatrix();
-        this.scene.translate(-0.35,0,-1.12);
-        this.scene.rotate(90.0*Math.PI/180.0, 1, 0, 0);
-        this.scene.scale(0.4,0.4,0.4);
-        this.quad.display();
+        this.scene.translate(-0.35,0,-0.7);
+        this.finvert1.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
-        this.scene.translate(-0.35,0,-0.92);
-        this.scene.scale(0.141,0.141,0.141);
-        this.scene.rotate(135.0*Math.PI/180.0, 0, 1, 0);
-        this.scene.rotate(90.0*Math.PI/180.0, 1, 0, 0);
-        this.triangle.display();
-        this.scene.popMatrix();
-
-
-        this.scene.pushMatrix();
-        this.scene.translate(0.35,0,-1.12);
-        this.scene.rotate(90.0*Math.PI/180.0, 1, 0, 0);
-        this.scene.scale(0.4,0.4,0.4);
-        this.quad.display();
-        this.scene.popMatrix();
-
-        this.scene.pushMatrix();
-        this.scene.translate(0.35,0,-0.92);
-        this.scene.scale(0.141,0.141,0.141);
-        this.scene.rotate(135.0*Math.PI/180.0, 0, 1, 0);
-        this.scene.rotate(90.0*Math.PI/180.0, 1, 0, 0);
-        this.triangle.display();
+        this.scene.translate(0.35,0,-0.7);
+        this.finvert2.display();
         this.scene.popMatrix();
 
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
-        this.scene.translate(-0.35,0,-1.12);
-        this.scene.rotate(90.0*Math.PI/180.0, 1, 0, 0);
-        this.scene.scale(0.4,0.4,0.4);
-        this.quad.display();
-        this.scene.popMatrix();
-
-        this.scene.pushMatrix();
-        this.scene.translate(-0.35,0,-0.92);
-        this.scene.scale(0.141,0.141,0.141);
-        this.scene.rotate(135.0*Math.PI/180.0, 0, 1, 0);
-        this.scene.rotate(90.0*Math.PI/180.0, 1, 0, 0);
-        this.triangle.display();
+        this.scene.translate(-0.35,0,-0.7);
+        this.finhor1.display();
         this.scene.popMatrix();
 
 
         this.scene.pushMatrix();
-        this.scene.translate(0.35,0,-1.12);
-        this.scene.rotate(90.0*Math.PI/180.0, 1, 0, 0);
-        this.scene.scale(0.4,0.4,0.4);
-        this.quad.display();
+        this.scene.translate(0.35,0,-0.7);
+        this.finhor2.display();
         this.scene.popMatrix();
 
-        this.scene.pushMatrix();
-        this.scene.translate(0.35,0,-0.92);
-        this.scene.scale(0.141,0.141,0.141);
-        this.scene.rotate(135.0*Math.PI/180.0, 0, 1, 0);
-        this.scene.rotate(90.0*Math.PI/180.0, 1, 0, 0);
-        this.triangle.display();
         this.scene.popMatrix();
-
 
 
     }
