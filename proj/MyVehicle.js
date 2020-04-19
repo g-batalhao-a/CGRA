@@ -94,15 +94,24 @@ class MyVehicle extends CGFobject {
     }
 
     update(t){
+        if (this.time == 0)
+            this.time = t / 1000 % 1000;
+
+        this.elapsedTime = (t / 1000 % 1000) - this.time;
+        this.time = t / 1000 % 1000;
+
         if(this.automatic){
-            this.time=t / 1000 % 1000;
-            this.radius=5;
+            this.autopilotTime += this.elapsedTime;
             this.speed=2*Math.PI/5;
-            this.angle_y=this.time*72;
+            this.angle_y = this.angle_y + this.elapsedTime*360/5;
+            if (this.angle_y > 360) {
+                console.log("Deu uma volta. Tempo = " + this.autopilotTime);
+                this.angle_y = this.angle_y % 360;
+            }
             this.finvert1.setAngle(-this.speed*5);
             this.finvert2.setAngle(-this.speed*5);
-            this.x_pos=this.radius*Math.sin(this.time*this.speed)+this.center_x;
-            this.z_pos = this.radius * Math.cos(this.time*this.speed)+this.center_z;
+            this.x_pos = -this.radius * Math.cos(this.autopilotTime*this.speed) + this.center_x;
+            this.z_pos = this.radius * Math.sin(this.autopilotTime*this.speed) + this.center_z;
         }
         else{
             this.x_pos += this.speed * Math.sin(this.angle_y*Math.PI/180);
@@ -111,8 +120,6 @@ class MyVehicle extends CGFobject {
         
         this.propeller1.setAngle(this.speed*t);
         this.propeller2.setAngle(-this.speed*t);
-        
-        
     }
 
     turn(v) {
@@ -137,12 +144,11 @@ class MyVehicle extends CGFobject {
     }
 
     setAutomatic(){
-        this.automatic=!this.automatic;
-        if(!this.automatic){
-            this.reset();
-        }
-        else{
-            this.time=0;
+        if (!this.automatic) {
+            this.automatic=true;
+            this.radius=5;
+            this.autopilotTime = 0;
+        
             if(Math.sin(this.angle_y*Math.PI/180)==0){
                 this.center_x=this.x_pos+5;
                 this.center_z=this.z_pos;
@@ -159,8 +165,6 @@ class MyVehicle extends CGFobject {
             console.log(this.center_x);
             console.log(this.center_z);
         }
-        
-        
     }
     
     display(){

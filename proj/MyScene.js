@@ -42,11 +42,11 @@ class MyScene extends CGFscene {
 
         //Objects connected to MyInterface
         this.displayAxis = true;
-        this.displayObject = false;
+        this.displayObject = true;
         this.displayNormals = false;
-        this.displayVehicle=false;
-        this.currentTexture=-1;
-        this.currentObject=0;
+        this.displayVehicle=true;
+        this.currentTexture=2;
+        this.currentObject=2;
         this.complexity=0.0;
         this.speedFactor=1;
         this.scaleFactor=1;
@@ -70,6 +70,8 @@ class MyScene extends CGFscene {
             'Cubemap':1,
             'Desert':2,
         };
+
+        this.updateTexture();
     }
     initLights() {
         this.setGlobalAmbientLight(0.5, 0.5, 0.5, 1.0);
@@ -138,10 +140,10 @@ class MyScene extends CGFscene {
         if(keysPressed){
             console.log(text);
         }
-        else{
+        /*else{
             if(!this.vehicle.automatic)
                 this.vehicle.turn(0);
-        }
+        }*/
     }
     // called periodically (as per setUpdatePeriod() in init())
     update(t){
