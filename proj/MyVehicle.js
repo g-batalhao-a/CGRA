@@ -102,7 +102,7 @@ class MyVehicle extends CGFobject {
 
         if(this.automatic){
             this.autopilotTime += this.elapsedTime;
-            this.speed=2*Math.PI/5;
+            this.angle_mov=this.autopilotTime*this.speed;
             this.angle_y = this.angle_y + this.elapsedTime*360/5;
             if (this.angle_y > 360) {
                 console.log("Deu uma volta. Tempo = " + this.autopilotTime);
@@ -110,8 +110,8 @@ class MyVehicle extends CGFobject {
             }
             this.finvert1.setAngle(-this.speed*5);
             this.finvert2.setAngle(-this.speed*5);
-            this.x_pos = -this.radius * Math.cos(this.autopilotTime*this.speed) + this.center_x;
-            this.z_pos = this.radius * Math.sin(this.autopilotTime*this.speed) + this.center_z;
+            this.x_pos = -this.radius * Math.cos(this.angle_mov) + this.center_x;
+            this.z_pos = this.radius * Math.sin(this.angle_mov) + this.center_z;
         }
         else{
             this.x_pos += this.speed * Math.sin(this.angle_y*Math.PI/180);
@@ -148,22 +148,46 @@ class MyVehicle extends CGFobject {
             this.automatic=true;
             this.radius=5;
             this.autopilotTime = 0;
+            this.speed=2*Math.PI/5;
         
-            if(Math.sin(this.angle_y*Math.PI/180)==0){
+            if(Math.cos(this.angle_y*Math.PI/180)==1){
                 this.center_x=this.x_pos+5;
                 this.center_z=this.z_pos;
+                this.autopilotTime=0;
             }
-            else if(Math.cos(this.angle_y*Math.PI/180)==0){
+            else if(Math.cos(this.angle_y*Math.PI/180)==-1){
+                this.center_x=this.x_pos-5;
+                this.center_z=this.z_pos;
+                this.autopilotTime=2.5;
+            }
+            else if(Math.sin(this.angle_y*Math.PI/180)==1){
+                this.center_z=this.z_pos-5;
+                this.center_x=this.x_pos;
+                this.autopilotTime=1.25;
+            }
+            else if(Math.sin(this.angle_y*Math.PI/180)==-1){
                 this.center_z=this.z_pos+5;
                 this.center_x=this.x_pos;
+                this.autopilotTime=3.75;
             }
             else{
-                this.slope=(this.speed * Math.cos(this.angle_y*Math.PI/180))/(this.speed * Math.sin(this.angle_y*Math.PI/180));
-                this.center_x=this.x_pos-Math.sqrt(25/(1+1/Math.pow(this.slope,2)));
-                this.center_z=this.slope*(this.center_x-this.x_pos)+this.z_pos;
+                this.slope=(Math.sin(this.angle_y*Math.PI/180.0))/(Math.cos(this.angle_y*Math.PI/180.0));
+
+                if(Math.sin(this.angle_y*Math.PI/180.0)>0)
+                    this.center_z=this.z_pos-Math.sqrt(25.0/(1.0+1.0/Math.pow(this.slope,2)));
+                else
+                    this.center_z=this.z_pos+Math.sqrt(25.0/(1.0+1.0/Math.pow(this.slope,2)));
+                
+                this.center_x=-1.0/(this.slope)*(this.center_z-this.z_pos)+this.x_pos;
+                
+
+                if(this.z_pos>this.center_z)
+                    this.autopilotTime=(Math.asin((this.x_pos-this.center_x)/this.radius)+Math.PI/2.0)/this.speed;
+                else if(this.z_pos<this.center_z)
+                    this.autopilotTime=5-(Math.asin((this.x_pos-this.center_x)/this.radius)+Math.PI/2.0)/this.speed;
+                
             }
-            console.log(this.center_x);
-            console.log(this.center_z);
+            
         }
     }
     

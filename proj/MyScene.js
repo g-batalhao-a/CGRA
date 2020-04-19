@@ -140,10 +140,10 @@ class MyScene extends CGFscene {
         if(keysPressed){
             console.log(text);
         }
-        /*else{
+        else{
             if(!this.vehicle.automatic)
                 this.vehicle.turn(0);
-        }*/
+        }
     }
     // called periodically (as per setUpdatePeriod() in init())
     update(t){
