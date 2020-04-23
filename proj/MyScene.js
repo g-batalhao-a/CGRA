@@ -5,6 +5,8 @@
 class MyScene extends CGFscene {
     constructor() {
         super();
+        this.selectedExampleShader = 0;
+		this.showShaderCode = false;
     }
     init(application) {
         super.init(application);
@@ -29,10 +31,12 @@ class MyScene extends CGFscene {
         //Initialize scene objects
         this.axis = new CGFaxis(this);
         this.vehicle = new MyVehicle(this,this.slices,this.stacks);
+        this.terrain=new MyTerrain(this);
         this.objects=[
             new MySphere(this, this.slices, this.stacks),
             new MyCylinder(this, this.slices),
             new MyUnitCubeQuad(this),
+            
         ];
         this.objectList={
             'Sphere' : 0,
@@ -45,6 +49,7 @@ class MyScene extends CGFscene {
         this.displayObject = true;
         this.displayNormals = false;
         this.displayVehicle=true;
+        this.displayTerrain=false;
         this.currentTexture=2;
         this.currentObject=2;
         this.complexity=0.0;
@@ -64,6 +69,7 @@ class MyScene extends CGFscene {
             new CGFtexture(this,'images/earth.jpg'),
             new CGFtexture(this,'images/cubemap.jpg'),
             new CGFtexture(this,'images/desert.png'),
+            new CGFtexture(this,'images/heightmap.jpg'),
         ];
         this.textureList={
             'Earth':0,
@@ -185,7 +191,8 @@ class MyScene extends CGFscene {
         this.pushMatrix();
 
         
-
+        
+        
         //This sphere does not have defined texture coordinates
         //this.incompleteSphere.display();
         if (this.displayNormals)
@@ -202,8 +209,13 @@ class MyScene extends CGFscene {
             this.scale(this.scaleFactor,this.scaleFactor,this.scaleFactor);
             this.vehicle.display();
         }
+
+        if(this.displayTerrain){
+            this.terrain.display();
+        }
         
         this.popMatrix();
         // ---- END Primitive drawing section
+        
     }
 }
