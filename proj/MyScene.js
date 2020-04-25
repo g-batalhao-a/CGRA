@@ -77,6 +77,13 @@ class MyScene extends CGFscene {
             'Desert':2,
         };
 
+        this.shader=new CGFshader(this.gl, "shaders/terrain.vert", "shaders/terrain.frag");
+        this.texture=new CGFtexture(this,'images/terrain.jpg');
+        this.map=new CGFtexture(this,'images/heightmap.jpg');
+        
+        this.shader.setUniformsValues({ uSampler1: 1 });
+        this.shader.setUniformsValues({ uSampler2: 2 });
+
         this.updateTexture();
     }
     initLights() {
@@ -211,11 +218,14 @@ class MyScene extends CGFscene {
         }
 
         if(this.displayTerrain){
+            /*this.setActiveShader(this.shader);
+            this.texture.bind(1);
+            this.map.bind(2);*/
             this.terrain.display();
         }
         
         this.popMatrix();
         // ---- END Primitive drawing section
-        
+        this.setActiveShader(this.defaultShader);
     }
 }

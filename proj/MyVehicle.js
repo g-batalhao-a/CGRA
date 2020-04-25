@@ -15,7 +15,7 @@ class MyVehicle extends CGFobject {
         this.finhor2= new MyFin(this.scene);
         this.finvert1= new MyFin(this.scene);
         this.finvert2= new MyFin(this.scene);
-        this.initBuffers();
+        this.initMaterials();
 
         this.angle_y=0;
         this.speed=0;
@@ -28,60 +28,44 @@ class MyVehicle extends CGFobject {
         this.center_x=0;this.center_z=0;
 
     }
-    /*
-    initBuffers() {
-        this.vertices = [];
-        this.indices = [];
-        this.normals = [];
+    initNormalVizBuffers(){
+        this.sphere.initNormalVizBuffers();
+        this.cylinder.initNormalVizBuffers();
+        this.propeller1.initNormalVizBuffers();
+        this.propeller2.initNormalVizBuffers();
+        this.finhor1.initNormalVizBuffers();
+        this.finhor2.initNormalVizBuffers();
+        this.finvert1.initNormalVizBuffers();
+        this.finvert2.initNormalVizBuffers();
 
-        var ang = 0;
-        var alphaAng = 2*Math.PI/this.slices;
+    }
+    initMaterials(){
+        this.body=new CGFappearance(this.scene);
+        this.body.setAmbient(0.7,0.7,0.7,1);
+        this.body.setDiffuse(0.9,0.9,0.9,1);
+        this.body.setDiffuse(0.2,0.2,0.2,1);
+        this.body.setShininess(10);
+        this.body.loadTexture('images/blimp_body.png');
+        this.body.setTextureWrap('REPEAT','REPEAT');
 
-        for(var i = 0; i < this.slices; i++){
-            // All vertices have to be declared for a given face
-            // even if they are shared with others, as the normals 
-            // in each face will be different
+        this.cockpit=new CGFappearance(this.scene);
+        this.cockpit.setAmbient(0.7,0.7,0.7,1);
+        this.cockpit.setDiffuse(0.9,0.9,0.9,1);
+        this.cockpit.setDiffuse(0.2,0.2,0.2,1);
+        this.cockpit.setShininess(10);
+        this.cockpit.loadTexture('images/cockpit.png');
+        this.cockpit.setTextureWrap('REPEAT','REPEAT');
 
-            var sa=Math.sin(ang);
-            var saa=Math.sin(ang+alphaAng);
-            var ca=Math.cos(ang);
-            var caa=Math.cos(ang+alphaAng);
+        this.helixes=new CGFappearance(this.scene);
+        this.helixes.setAmbient(0.7,0.7,0.7,1);
+        this.helixes.setDiffuse(0.9,0.9,0.9,1);
+        this.helixes.setDiffuse(0.2,0.2,0.2,1);
+        this.helixes.setShininess(10);
+        this.helixes.loadTexture('images/helixes.png');
+        this.helixes.setTextureWrap('REPEAT','REPEAT');
 
-            this.vertices.push(0,2,0);
-            this.vertices.push(ca, 0, -sa);
-            this.vertices.push(caa, 0, -saa);
 
-            // triangle normal computed by cross product of two edges
-            var normal= [
-                saa-sa,
-                ca*saa-sa*caa,
-                caa-ca
-            ];
-
-            // normalization
-            var nsize=Math.sqrt(
-                normal[0]*normal[0]+
-                normal[1]*normal[1]+
-                normal[2]*normal[2]
-                );
-            normal[0]/=nsize;
-            normal[1]/=nsize;
-            normal[2]/=nsize;
-
-            // push normal once for each vertex of this triangle
-            this.normals.push(...normal);
-            this.normals.push(...normal);
-            this.normals.push(...normal);
-
-            this.indices.push(3*i, (3*i+1) , (3*i+2) );
-
-            ang+=alphaAng;
-        }
-
-        this.primitiveType = this.scene.gl.TRIANGLES;
-        this.initGLBuffers();
-    }*/
-    
+    }
     updateBuffers(complexity){
         this.slices = 3 + Math.round(9 * complexity); //complexity varies 0-10, so slices varies 3-93
         this.stacks = 3 + Math.round(9*complexity);
@@ -89,7 +73,7 @@ class MyVehicle extends CGFobject {
         this.sphere.updateStacks(this.stacks);
         this.cylinder.updateSlices(this.slices);
         // reinitialize buffers
-        this.initBuffers();
+        this.initMaterials();
         this.initNormalVizBuffers();
     }
 
@@ -131,6 +115,9 @@ class MyVehicle extends CGFobject {
 
     accelerate(v) {
         this.speed += v;
+        if(this.speed<0){
+            this.speed=0;
+        }
     }
 
     reset() {
@@ -193,20 +180,22 @@ class MyVehicle extends CGFobject {
     
     display(){
 
-        this.scene.setDiffuse(0,0,1);
-        this.scene.setSpecular(0, 0, 0, 1);
-        this.scene.setAmbient(0, 0, 0.5, 1);
+        
+        this.scene.setAmbient(0.5, 0.5, 0.5, 1);
         this.scene.pushMatrix();
+        this.scene.translate(0, 10, 0);
         this.scene.translate(this.x_pos, this.y_pos, this.z_pos);
         this.scene.rotate(this.angle_y*Math.PI/180.0, 0, 1, 0);
         //Blimp balloon
         this.scene.pushMatrix();
+        this.body.apply();
         this.scene.scale(0.5,0.5,1);
         this.sphere.display();
         this.scene.popMatrix();
         
         //Cockpit
         this.scene.pushMatrix();
+        this.cockpit.apply();
         this.scene.translate(0,-0.5,0);
         this.scene.scale(0.10,0.10,0.6);
         this.scene.translate(0,0,-0.5);
@@ -229,29 +218,34 @@ class MyVehicle extends CGFobject {
 
         //Engine
         this.scene.pushMatrix();
+        this.helixes.apply();
         this.scene.translate(0.09,-0.51,-0.37);
         this.scene.scale(0.025,0.025,0.05);
         this.sphere.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
+        this.helixes.apply();
         this.scene.translate(0.09,-0.51,-0.42);
         this.propeller1.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
+        this.helixes.apply();
         this.scene.translate(-0.09,-0.51,-0.37);
         this.scene.scale(0.025,0.025,0.05);
         this.sphere.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
+        this.helixes.apply();
         this.scene.translate(-0.09,-0.51,-0.42);
         this.propeller2.display();
         this.scene.popMatrix();
 
 
         //Flight Control Surfaces
+        this.cockpit.apply();
         this.scene.pushMatrix();
         this.scene.rotate(90.0*Math.PI/180.0, 0, 0, 1);
 

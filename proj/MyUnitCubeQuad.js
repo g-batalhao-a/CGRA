@@ -68,48 +68,54 @@ class MyUnitCubeQuad extends CGFobject {
         this.scene.pushMatrix();
         this.scene.scale(50,50,50);
         
-        this.front.apply();
+        
         // Front
         this.scene.pushMatrix();
+        this.front.apply();
         this.scene.translate(0, 0, 0.5);
         this.quad.display();
         this.scene.popMatrix();
 
-        this.back.apply();
+        
         // Back
         this.scene.pushMatrix();
+        this.back.apply();
         this.scene.translate(0, 0, -0.5);
         this.scene.rotate(Math.PI, 0, 1, 0);
         this.quad.display();
         this.scene.popMatrix();
 
-        this.right.apply();
+        
         // Right
         this.scene.pushMatrix();
+        this.right.apply();
         this.scene.translate(0.5, 0, 0);
         this.scene.rotate(Math.PI / 2, 0, 1, 0);
         this.quad.display();
         this.scene.popMatrix();
 
-        this.left.apply();
+        
         // Left
         this.scene.pushMatrix();
+        this.left.apply();
         this.scene.translate(-0.5, 0, 0);
         this.scene.rotate(-Math.PI / 2, 0, 1, 0);
         this.quad.display();
         this.scene.popMatrix();
 
-        this.top.apply();
+        
         // Top
         this.scene.pushMatrix();
+        this.top.apply();
         this.scene.translate(0, 0.5, 0);
         this.scene.rotate(-Math.PI / 2, 1, 0, 0);
         this.quad.display();
         this.scene.popMatrix();
 
-        this.bot.apply();
+        
         // Bottom
         this.scene.pushMatrix();
+        this.bot.apply();
         this.scene.translate(0, -0.5, 0);
         this.scene.rotate(Math.PI / 2, 1, 0, 0);
         this.quad.display();
