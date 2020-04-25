@@ -35,13 +35,13 @@ class MyScene extends CGFscene {
         this.objects=[
             new MySphere(this, this.slices, this.stacks),
             new MyCylinder(this, this.slices),
-            new MyUnitCubeQuad(this),
+            new MyUnitCubeQuad(this)
             
         ];
         this.objectList={
             'Sphere' : 0,
             'Cylinder': 1,
-            'Cube':2,
+            'Cube':2
         };
 
         //Objects connected to MyInterface
@@ -83,6 +83,13 @@ class MyScene extends CGFscene {
         
         this.shader.setUniformsValues({ uSampler1: 1 });
         this.shader.setUniformsValues({ uSampler2: 2 });
+
+
+        this.supplies=[];
+        for(var i=0;i<5;i++){
+            this.supplies.push(new MySupply(this));
+        }
+        this.nSupply=0;
 
         this.updateTexture();
     }
@@ -147,7 +154,20 @@ class MyScene extends CGFscene {
         if (this.gui.isKeyPressed("KeyR")) {
             text+=" R "
             this.vehicle.reset();
+            this.nSupply=0;
+            for(var i=0;i<5;i++){
+                this.supplies[i].state=SupplyStates.INACTIVE;
+                this.supplies[i].y_pos=9;
+            }
             keysPressed = true;
+        }
+
+        if(this.gui.isKeyPressed("KeyL")){
+            text+=" L ";
+            if(this.nSupply!=5){
+                this.supplies[this.nSupply].dropSupply(this.vehicle.x_pos,this.vehicle.z_pos);
+                this.nSupply++;
+            }
         }
 
         if(keysPressed){
@@ -162,6 +182,9 @@ class MyScene extends CGFscene {
     update(t){
         this.checkKeys(t);
         this.vehicle.update(t);
+        for (var i=0 ; i<5; i++){
+            this.supplies[i].update(t);
+        }
         //To be done...
     }
 
@@ -215,6 +238,10 @@ class MyScene extends CGFscene {
         if(this.displayVehicle){
             this.scale(this.scaleFactor,this.scaleFactor,this.scaleFactor);
             this.vehicle.display();
+        }
+
+        for (var i=0 ; i<5; i++){
+            this.supplies[i].display();
         }
 
         if(this.displayTerrain){
