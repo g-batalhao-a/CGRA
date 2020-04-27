@@ -77,14 +77,6 @@ class MyScene extends CGFscene {
             'Desert':2,
         };
 
-        this.shader=new CGFshader(this.gl, "shaders/terrain.vert", "shaders/terrain.frag");
-        this.texture=new CGFtexture(this,'images/terrain.jpg');
-        this.map=new CGFtexture(this,'images/heightmap.jpg');
-        
-        this.shader.setUniformsValues({ uSampler1: 1 });
-        this.shader.setUniformsValues({ uSampler2: 2 });
-
-
         this.supplies=[];
         for(var i=0;i<5;i++){
             this.supplies.push(new MySupply(this));
@@ -131,12 +123,12 @@ class MyScene extends CGFscene {
         if(!this.vehicle.automatic){
             if(this.gui.isKeyPressed("KeyW")){
                 text+=" W ";
-                this.vehicle.accelerate(0.3*this.speedFactor);
+                this.vehicle.accelerate(0.1*this.speedFactor);
                 keysPressed=true;
             }
             if(this.gui.isKeyPressed("KeyS")){
                 text+=" S ";
-                this.vehicle.accelerate(-0.3*this.speedFactor);
+                this.vehicle.accelerate(-0.1*this.speedFactor);
                 keysPressed=true;
             }
             if(this.gui.isKeyPressed("KeyA")){
