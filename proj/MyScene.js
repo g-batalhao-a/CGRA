@@ -32,12 +32,10 @@ class MyScene extends CGFscene {
         this.axis = new CGFaxis(this);
         this.vehicle = new MyVehicle(this,this.slices,this.stacks);
         this.terrain=new MyTerrain(this);
-        this.flag=new MyFlag(this);
         this.objects=[
             new MySphere(this, this.slices, this.stacks),
             new MyCylinder(this, this.slices),
             new MyUnitCubeQuad(this),
-            
             
         ];
         this.objectList={
@@ -179,7 +177,6 @@ class MyScene extends CGFscene {
         for (var i=0 ; i<5; i++){
             this.supplies[i].update(t);
         }
-        this.flag.update(10,t/1000%1000);
         //To be done...
     }
 
@@ -243,7 +240,6 @@ class MyScene extends CGFscene {
             this.terrain.display();
         }
 
-        this.flag.display();
         
         this.popMatrix();
         // ---- END Primitive drawing section

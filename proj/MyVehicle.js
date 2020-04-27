@@ -16,6 +16,7 @@ class MyVehicle extends CGFobject {
         this.finvert1= new MyFin(this.scene);
         this.finvert2= new MyFin(this.scene);
         this.flag = new MyFlag(this.scene);
+        
         this.initMaterials();
 
         this.angle_y=0;
@@ -66,13 +67,6 @@ class MyVehicle extends CGFobject {
         this.helixes.loadTexture('images/helixes.png');
         this.helixes.setTextureWrap('REPEAT','REPEAT');
 
-        // this.shader=new CGFshader(this.scene.gl, "shaders/flag.vert", "shaders/flag.frag");
-        // this.texture=new CGFtexture(this.scene,'images/nemo.jpg');
-
-        // this.shader.setUniformsValues({ uSampler1: 1 });
-        // this.shader.setUniformsValues({ speed: 0 });
-        // this.shader.setUniformsValues({ timeFactor: 0 });
-
 
     }
     updateBuffers(complexity){
@@ -114,8 +108,6 @@ class MyVehicle extends CGFobject {
         this.propeller1.setAngle(this.speed*t);
         this.propeller2.setAngle(-this.speed*t);
         this.flag.update(this.speed,this.time);
-        // this.shader.setUniformsValues({ timeFactor: this.time });
-        // this.shader.setUniformsValues({speed:this.speed});
     }
     turn(v) {
         this.angle_y += v;
@@ -129,7 +121,6 @@ class MyVehicle extends CGFobject {
         if(this.speed<0){
             this.speed=0;
         }
-        //this.shader.setUniformsValues({speed:this.speed});
     }
 
     reset() {
@@ -288,12 +279,10 @@ class MyVehicle extends CGFobject {
         
         
         this.scene.pushMatrix();
-        this.scene.translate(0,0,-2);
+        this.scene.translate(0,0,-1.8);
         this.flag.display();
         this.scene.popMatrix();
 
-        
-        
 
         this.scene.popMatrix();
 
