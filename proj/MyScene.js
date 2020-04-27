@@ -32,16 +32,18 @@ class MyScene extends CGFscene {
         this.axis = new CGFaxis(this);
         this.vehicle = new MyVehicle(this,this.slices,this.stacks);
         this.terrain=new MyTerrain(this);
+        this.flag=new MyFlag(this);
         this.objects=[
             new MySphere(this, this.slices, this.stacks),
             new MyCylinder(this, this.slices),
-            new MyUnitCubeQuad(this)
+            new MyUnitCubeQuad(this),
+            
             
         ];
         this.objectList={
             'Sphere' : 0,
             'Cylinder': 1,
-            'Cube':2
+            'Cube':2,
         };
 
         //Objects connected to MyInterface
@@ -177,6 +179,7 @@ class MyScene extends CGFscene {
         for (var i=0 ; i<5; i++){
             this.supplies[i].update(t);
         }
+        this.flag.update(10,t/1000%1000);
         //To be done...
     }
 
@@ -237,11 +240,10 @@ class MyScene extends CGFscene {
         }
 
         if(this.displayTerrain){
-            /*this.setActiveShader(this.shader);
-            this.texture.bind(1);
-            this.map.bind(2);*/
             this.terrain.display();
         }
+
+        this.flag.display();
         
         this.popMatrix();
         // ---- END Primitive drawing section

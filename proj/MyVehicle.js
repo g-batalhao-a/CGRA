@@ -15,6 +15,7 @@ class MyVehicle extends CGFobject {
         this.finhor2= new MyFin(this.scene);
         this.finvert1= new MyFin(this.scene);
         this.finvert2= new MyFin(this.scene);
+        this.flag = new MyFlag(this.scene);
         this.initMaterials();
 
         this.angle_y=0;
@@ -37,6 +38,7 @@ class MyVehicle extends CGFobject {
         this.finhor2.initNormalVizBuffers();
         this.finvert1.initNormalVizBuffers();
         this.finvert2.initNormalVizBuffers();
+        this.flag.initNormalVizBuffers();
 
     }
     initMaterials(){
@@ -63,6 +65,13 @@ class MyVehicle extends CGFobject {
         this.helixes.setShininess(10);
         this.helixes.loadTexture('images/helixes.png');
         this.helixes.setTextureWrap('REPEAT','REPEAT');
+
+        // this.shader=new CGFshader(this.scene.gl, "shaders/flag.vert", "shaders/flag.frag");
+        // this.texture=new CGFtexture(this.scene,'images/nemo.jpg');
+
+        // this.shader.setUniformsValues({ uSampler1: 1 });
+        // this.shader.setUniformsValues({ speed: 0 });
+        // this.shader.setUniformsValues({ timeFactor: 0 });
 
 
     }
@@ -104,8 +113,10 @@ class MyVehicle extends CGFobject {
         
         this.propeller1.setAngle(this.speed*t);
         this.propeller2.setAngle(-this.speed*t);
+        this.flag.update(this.speed,this.time);
+        // this.shader.setUniformsValues({ timeFactor: this.time });
+        // this.shader.setUniformsValues({speed:this.speed});
     }
-
     turn(v) {
         this.angle_y += v;
         this.finvert1.setAngle(-v*5);
@@ -118,6 +129,7 @@ class MyVehicle extends CGFobject {
         if(this.speed<0){
             this.speed=0;
         }
+        //this.shader.setUniformsValues({speed:this.speed});
     }
 
     reset() {
@@ -127,6 +139,7 @@ class MyVehicle extends CGFobject {
         this.speed = 0;
         this.angle_y = 0;
         this.automatic=false;
+        this.flag.update(this.speed,0);
 
     }
 
@@ -179,9 +192,8 @@ class MyVehicle extends CGFobject {
     }
     
     display(){
-
-        
         this.scene.setAmbient(0.5, 0.5, 0.5, 1);
+        
         this.scene.pushMatrix();
         this.scene.translate(0, 10, 0);
         this.scene.translate(this.x_pos, this.y_pos, this.z_pos);
@@ -272,8 +284,18 @@ class MyVehicle extends CGFobject {
         this.finhor2.display();
         this.scene.popMatrix();
 
+        //Flag
+        
+        
+        this.scene.pushMatrix();
+        this.scene.translate(0,0,-2);
+        this.flag.display();
         this.scene.popMatrix();
 
+        
+        
+
+        this.scene.popMatrix();
 
     }
 
