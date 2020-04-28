@@ -67,6 +67,6 @@ class MyBillboard extends CGFobject {
         this.scene.popMatrix(); 
         
         
-        
+        //this.scene.setActiveShader(this.scene.defaultShader);
     }
 }

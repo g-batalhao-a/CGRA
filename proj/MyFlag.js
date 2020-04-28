@@ -71,6 +71,6 @@ class MyFlag extends CGFobject {
         this.scene.popMatrix(); 
 
         this.scene.popMatrix(); 
-        this.scene.setActiveShader(this.scene.defaultShader);
+        //this.scene.setActiveShader(this.scene.defaultShader);
     }
 }

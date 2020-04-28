@@ -238,16 +238,15 @@ class MyScene extends CGFscene {
         for (var i=0 ; i<5; i++){
             this.supplies[i].display();
         }
-        this.billboard.display();
-        
+
         if(this.displayTerrain){
             this.terrain.display();
         }
 
-        
+        this.billboard.display();
         
         this.popMatrix();
         // ---- END Primitive drawing section
-        this.setActiveShader(this.defaultShader);
+        //this.setActiveShader(this.defaultShader);
     }
 }
