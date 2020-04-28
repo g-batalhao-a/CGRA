@@ -49,7 +49,7 @@ class MyScene extends CGFscene {
         this.displayObject = true;
         this.displayNormals = false;
         this.displayVehicle=true;
-        this.displayTerrain=false;
+        this.displayTerrain=true;
         this.currentTexture=2;
         this.currentObject=2;
         this.complexity=0.0;
@@ -93,7 +93,7 @@ class MyScene extends CGFscene {
         this.lights[0].update();
     }
     initCameras() {
-        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
+        this.camera = new CGFcamera(0.5, 0.1, 500, vec3.fromValues(30, 20, 30), vec3.fromValues(0, 0, 0));
     }
     setDefaultAppearance() {
         this.setAmbient(0.2, 0.4, 0.8, 1.0);
@@ -238,12 +238,13 @@ class MyScene extends CGFscene {
         for (var i=0 ; i<5; i++){
             this.supplies[i].display();
         }
-        this.billboard.display();
+        
         
         if(this.displayTerrain){
             this.terrain.display();
         }
 
+        this.billboard.display();
         
         
         this.popMatrix();

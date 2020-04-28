@@ -8,9 +8,9 @@ varying vec4 normal;
 uniform int dropped;
 
 void main() {
-    float edge = -0.6 + (1.2 / 5.0) * float(dropped);
+    float limit = -0.6 + (1.2 / 5.0) * float(dropped);
 
-    if (coords.x > edge)
+    if (coords.x > limit)
         gl_FragColor = vec4(0.1, 0.1, 0.1, 1);
     else {
         gl_FragColor.rgb =  vec3(1.0 - (0.6 + coords.x / 0.6), 0.6 + coords.x / 0.6, 0);

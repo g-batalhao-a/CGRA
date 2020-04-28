@@ -13,7 +13,20 @@ class MyBillboard extends CGFobject {
         this.support2=new MyQuadDSided(this.scene);
 
         this.shader=new CGFshader(this.scene.gl, "shaders/progress.vert", "shaders/progress.frag");
-        //this.texture=new CGFtexture(this.scene,'images/flag.png');
+        this.texture=new CGFappearance(this.scene);
+        this.texture.setAmbient(0.9, 0.9, 0.9, 1);
+        this.texture.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.texture.setSpecular(0.1, 0.1, 0.1, 1);
+        this.texture.setShininess(10.0);
+        this.texture.loadTexture('images/billboard.png');
+        this.texture.setTextureWrap('REPEAT', 'REPEAT');
+
+        this.texture_supp=new CGFappearance(this.scene)
+        this.texture_supp.setAmbient(0.9, 0.9, 0.9, 1);
+        this.texture_supp.setDiffuse(0.0, 0.45, 0.9, 1);
+        this.texture_supp.setSpecular(0.1, 0.1, 0.1, 1);
+        this.texture_supp.setShininess(10.0);
+
         this.drop=0;
         this.shader.setUniformsValues({ dropped: this.drop });
 
@@ -28,9 +41,12 @@ class MyBillboard extends CGFobject {
     }
     display(){
         this.scene.pushMatrix();
+        this.scene.translate(11,8,14);
+        this.scene.rotate(45*Math.PI/180.0, 0, 1, 0);
+
+        this.scene.pushMatrix();
         this.scene.translate(0,-1,0);
-        
-        
+        this.texture_supp.apply();
         this.scene.pushMatrix();
         this.scene.translate(0.95,0,0);
         this.scene.scale(0.1,1,1);
@@ -49,11 +65,12 @@ class MyBillboard extends CGFobject {
 
         this.scene.pushMatrix();
         this.scene.rotate(-180.0*Math.PI/180.0, 0, 1, 0);
-        this.board.display();
+        this.board_back.display();
         this.scene.popMatrix(); 
 
         this.scene.pushMatrix();
-        this.board_back.display();
+        this.texture.apply();
+        this.board.display();
         this.scene.popMatrix(); 
 
         this.scene.popMatrix();
@@ -66,7 +83,7 @@ class MyBillboard extends CGFobject {
         this.bar.display();
         this.scene.popMatrix(); 
         
-        
+        this.scene.popMatrix();
         
     }
 }
