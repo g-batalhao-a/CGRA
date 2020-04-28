@@ -82,7 +82,7 @@ class MyScene extends CGFscene {
             this.supplies.push(new MySupply(this));
         }
         this.nSupply=0;
-
+        this.billboard = new MyBillboard(this);
         this.updateTexture();
     }
     initLights() {
@@ -151,6 +151,7 @@ class MyScene extends CGFscene {
                 this.supplies[i].state=SupplyStates.INACTIVE;
                 this.supplies[i].y_pos=9;
             }
+            this.billboard.reset();
             keysPressed = true;
         }
 
@@ -160,6 +161,8 @@ class MyScene extends CGFscene {
                 this.supplies[this.nSupply].dropSupply(this.vehicle.x_pos,this.vehicle.z_pos);
                 this.nSupply++;
             }
+            this.billboard.update();
+            keysPressed = true;
         }
 
         if(keysPressed){
@@ -235,11 +238,13 @@ class MyScene extends CGFscene {
         for (var i=0 ; i<5; i++){
             this.supplies[i].display();
         }
-
+        this.billboard.display();
+        
         if(this.displayTerrain){
             this.terrain.display();
         }
 
+        
         
         this.popMatrix();
         // ---- END Primitive drawing section
