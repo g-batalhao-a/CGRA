@@ -23,12 +23,14 @@ class MyFlag extends CGFobject {
         this.shader_inverted.setUniformsValues({ timeFactor: 0 });
 
     }
-    update(sp, tf){
+    update(sp, tf, accel){
         this.shader.setUniformsValues({ speed: sp });
         this.shader.setUniformsValues({ timeFactor: tf });
+        this.shader.setUniformsValues({ acceleration: accel});
 
         this.shader_inverted.setUniformsValues({ speed: sp });
         this.shader_inverted.setUniformsValues({ timeFactor: tf });
+        this.shader_inverted.setUniformsValues({ acceleration: accel});
         
     }
     display(){

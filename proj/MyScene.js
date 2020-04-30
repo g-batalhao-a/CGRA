@@ -55,6 +55,7 @@ class MyScene extends CGFscene {
         this.complexity=0.0;
         this.speedFactor=1;
         this.scaleFactor=1;
+        this.dropCooldown = 0;
         //Material
         this.material=new CGFappearance(this);
         this.material.setAmbient(0.7,0.7,0.7,1);
@@ -155,12 +156,13 @@ class MyScene extends CGFscene {
             keysPressed = true;
         }
 
-        if(this.gui.isKeyPressed("KeyL")){
+        if(this.gui.isKeyPressed("KeyL") && this.dropCooldown == 0){
             text+=" L ";
             if(this.nSupply!=5){
                 this.supplies[this.nSupply].dropSupply(this.vehicle.x_pos,this.vehicle.z_pos);
                 this.nSupply++;
             }
+            this.dropCooldown = 10;
             this.billboard.update();
             keysPressed = true;
         }
@@ -169,12 +171,16 @@ class MyScene extends CGFscene {
             console.log(text);
         }
         else{
-            if(!this.vehicle.automatic)
+            if(!this.vehicle.automatic) {
                 this.vehicle.turn(0);
+                this.vehicle.accelerate(0);
+            }
         }
     }
     // called periodically (as per setUpdatePeriod() in init())
     update(t){
+        if (this.dropCooldown > 0)
+            this.dropCooldown--;
         this.checkKeys(t);
         this.vehicle.update(t);
         for (var i=0 ; i<5; i++){
@@ -231,8 +237,11 @@ class MyScene extends CGFscene {
         }
 
         if(this.displayVehicle){
+            this.pushMatrix();
+            this.translate(0, 10, 0);
             this.scale(this.scaleFactor,this.scaleFactor,this.scaleFactor);
             this.vehicle.display();
+            this.popMatrix();
         }
 
         for (var i=0 ; i<5; i++){

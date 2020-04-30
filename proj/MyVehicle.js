@@ -29,6 +29,8 @@ class MyVehicle extends CGFobject {
         this.slope=0;
         this.center_x=0;this.center_z=0;
 
+        this.accel = 0;
+
     }
     initNormalVizBuffers(){
         this.sphere.initNormalVizBuffers();
@@ -107,7 +109,7 @@ class MyVehicle extends CGFobject {
         
         this.propeller1.setAngle(this.speed*t);
         this.propeller2.setAngle(-this.speed*t);
-        this.flag.update(this.speed,this.time);
+        this.flag.update(this.speed,this.time,this.accel);
     }
     turn(v) {
         this.angle_y += v;
@@ -117,6 +119,7 @@ class MyVehicle extends CGFobject {
     }
 
     accelerate(v) {
+        this.accel = v;
         this.speed += v;
         if(this.speed<0){
             this.speed=0;
@@ -186,7 +189,6 @@ class MyVehicle extends CGFobject {
         this.scene.setAmbient(0.5, 0.5, 0.5, 1);
         
         this.scene.pushMatrix();
-        this.scene.translate(0, 10, 0);
         this.scene.translate(this.x_pos, this.y_pos, this.z_pos);
         this.scene.rotate(this.angle_y*Math.PI/180.0, 0, 1, 0);
         //Blimp balloon
