@@ -94,7 +94,7 @@ class MyVehicle extends CGFobject {
             this.angle_mov=this.autopilotTime*this.speed;
             this.angle_y = this.angle_y + this.elapsedTime*360/5;
             if (this.angle_y > 360) {
-                console.log("Deu uma volta. Tempo = " + this.autopilotTime);
+                //console.log("Deu uma volta. Tempo = " + this.autopilotTime);
                 this.angle_y = this.angle_y % 360;
             }
             this.finvert1.setAngle(-this.speed*5);
@@ -271,15 +271,12 @@ class MyVehicle extends CGFobject {
         this.finhor1.display();
         this.scene.popMatrix();
 
-
         this.scene.pushMatrix();
         this.scene.translate(0.35,0,-0.7);
         this.finhor2.display();
         this.scene.popMatrix();
 
         //Flag
-        
-        
         this.scene.pushMatrix();
         this.scene.translate(0,0,-1.8);
         this.flag.display();

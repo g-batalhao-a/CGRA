@@ -31,7 +31,7 @@ class MySupply extends CGFobject {
             this.y_pos-=(this.elapsedTime*(8.5/3.0));
             if(this.y_pos<=0.5){
                 this.land();
-                console.log(this.dropTime);
+                //console.log(this.dropTime);
             }
                 
             

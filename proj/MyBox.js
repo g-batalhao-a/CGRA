@@ -14,8 +14,8 @@ class MyBox extends CGFobject {
         //wooden material
         this.wooden = new CGFappearance(scene);
         this.wooden.setAmbient(0.9, 0.9, 0.9, 1);
-        this.wooden.setDiffuse(0.0, 0.0, 0.0, 0);
-        this.wooden.setSpecular(0.0, 0.0, 0.0, 0);
+        this.wooden.setDiffuse(0.1, 0.1, 0.1, 1);
+        this.wooden.setSpecular(0.1, 0.1, 0.1, 1);
         this.wooden.setShininess(10.0);
         this.wooden.loadTexture('images/wood.png');
         this.wooden.setTextureWrap('REPEAT', 'REPEAT');
@@ -32,14 +32,12 @@ class MyBox extends CGFobject {
         this.quad.display();
         this.scene.popMatrix();
 
-        
         // Back
         this.scene.pushMatrix();
         this.scene.translate(0, 0, -0.5);
         this.quad.display();
         this.scene.popMatrix();
 
-        
         // Right
         this.scene.pushMatrix();
         this.scene.translate(0.5, 0, 0);
@@ -47,7 +45,6 @@ class MyBox extends CGFobject {
         this.quad.display();
         this.scene.popMatrix();
 
-        
         // Left
         this.scene.pushMatrix();
         this.scene.translate(-0.5, 0, 0);
@@ -55,7 +52,6 @@ class MyBox extends CGFobject {
         this.quad.display();
         this.scene.popMatrix();
 
-        
         // Top
         this.scene.pushMatrix();
         this.scene.translate(0, 0.5, 0);
@@ -63,7 +59,6 @@ class MyBox extends CGFobject {
         this.quad.display();
         this.scene.popMatrix();
 
-        
         // Bottom
         this.scene.pushMatrix();
         this.scene.translate(0, -0.5, 0);
@@ -71,7 +66,6 @@ class MyBox extends CGFobject {
         this.quad.display();
         this.scene.popMatrix();
 
-        
         this.scene.popMatrix();
     }
     enableNormalViz(){

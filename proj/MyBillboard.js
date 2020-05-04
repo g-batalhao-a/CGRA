@@ -12,6 +12,7 @@ class MyBillboard extends CGFobject {
         this.support1=new MyQuadDSided(this.scene);
         this.support2=new MyQuadDSided(this.scene);
 
+
         this.shader=new CGFshader(this.scene.gl, "shaders/progress.vert", "shaders/progress.frag");
         this.texture=new CGFappearance(this.scene);
         this.texture.setAmbient(0.9, 0.9, 0.9, 1);
