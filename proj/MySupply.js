@@ -50,7 +50,10 @@ class MySupply extends CGFobject {
         if(this.state!=SupplyStates.INACTIVE){
             this.scene.pushMatrix();
             this.scene.translate(this.x_pos,this.y_pos,this.z_pos);
-            this.box.display();
+            if(this.state==SupplyStates.FALLING)
+                this.box.display(false);
+            if(this.state==SupplyStates.LANDED)
+                this.box.display(true);
             this.scene.popMatrix();
         }
         

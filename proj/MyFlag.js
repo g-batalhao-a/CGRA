@@ -75,4 +75,11 @@ class MyFlag extends CGFobject {
         this.scene.popMatrix(); 
         this.scene.setActiveShader(this.scene.defaultShader);
     }
+    initNormalVizBuffers(){
+        this.f1.initNormalVizBuffers();
+        this.f2.initNormalVizBuffers();
+        this.support1.initNormalVizBuffers();
+        this.support2.initNormalVizBuffers();
+
+    }
 }

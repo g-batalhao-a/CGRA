@@ -19,12 +19,24 @@ class MyBox extends CGFobject {
         this.wooden.setShininess(10.0);
         this.wooden.loadTexture('images/wood.png');
         this.wooden.setTextureWrap('REPEAT', 'REPEAT');
+
+        //wooden material
+        this.land = new CGFappearance(scene);
+        this.land.setAmbient(0.9, 0.9, 0.9, 1);
+        this.land.setDiffuse(0.1, 0.1, 0.1, 1);
+        this.land.setSpecular(0.1, 0.1, 0.1, 1);
+        this.land.setShininess(10.0);
+        this.land.loadTexture('images/box_land.png');
+        this.land.setTextureWrap('REPEAT', 'REPEAT');
     }
-	display() {
+	display(landed) {
         this.scene.pushMatrix();
         this.scene.scale(1,1,1);
         
-        this.wooden.apply();
+        if(!landed)
+            this.wooden.apply();
+        else
+            this.land.apply();
         // Front
         this.scene.pushMatrix();
         this.scene.translate(0, 0, 0.5);
