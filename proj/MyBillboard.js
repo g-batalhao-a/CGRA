@@ -7,11 +7,7 @@ class MyBillboard extends CGFobject {
 	constructor(scene) {
 		super(scene);
         this.board= new MyPlane(this.scene,60);
-        this.board_back = new MyPlane(this.scene,60);
-        this.bar= new MyPlane(this.scene,60);
-        this.support1=new MyQuadDSided(this.scene);
-        this.support2=new MyQuadDSided(this.scene);
-
+        this.support=new MyQuadDSided(this.scene);
 
         this.shader=new CGFshader(this.scene.gl, "shaders/progress.vert", "shaders/progress.frag");
         this.texture=new CGFappearance(this.scene);
@@ -51,13 +47,13 @@ class MyBillboard extends CGFobject {
         this.scene.pushMatrix();
         this.scene.translate(0.95,0,0);
         this.scene.scale(0.1,1,1);
-        this.support1.display();
+        this.support.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
         this.scene.translate(-0.95,0,0);
         this.scene.scale(0.1,1,1);
-        this.support2.display();
+        this.support.display();
         this.scene.popMatrix();
         this.scene.popMatrix();
 
@@ -66,7 +62,7 @@ class MyBillboard extends CGFobject {
 
         this.scene.pushMatrix();
         this.scene.rotate(-180.0*Math.PI/180.0, 0, 1, 0);
-        this.board_back.display();
+        this.board.display();
         this.scene.popMatrix(); 
 
         this.scene.pushMatrix();
@@ -81,7 +77,7 @@ class MyBillboard extends CGFobject {
 
         this.scene.pushMatrix();
         this.scene.translate(0,0,0.01);
-        this.bar.display();
+        this.board.display();
         this.scene.popMatrix(); 
         
         this.scene.popMatrix();

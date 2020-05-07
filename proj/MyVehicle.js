@@ -11,10 +11,8 @@ class MyVehicle extends CGFobject {
         this.cylinder= new MyCylinder(this.scene, this.slices);
         this.propeller1 = new MyPropeller(this.scene);
         this.propeller2 = new MyPropeller(this.scene);
-        this.finhor1= new MyFin(this.scene);
-        this.finhor2= new MyFin(this.scene);
-        this.finvert1= new MyFin(this.scene);
-        this.finvert2= new MyFin(this.scene);
+        this.finhor= new MyFin(this.scene);
+        this.finvert= new MyFin(this.scene);
         this.flag = new MyFlag(this.scene);
         
         this.initMaterials();
@@ -22,7 +20,6 @@ class MyVehicle extends CGFobject {
         this.angle_y=0;
         this.speed=0;
         this.x_pos=0;this.y_pos=0;this.z_pos=0;
-
 
         this.automatic=false;
         this.time=0;
@@ -37,10 +34,8 @@ class MyVehicle extends CGFobject {
         this.cylinder.initNormalVizBuffers();
         this.propeller1.initNormalVizBuffers();
         this.propeller2.initNormalVizBuffers();
-        this.finhor1.initNormalVizBuffers();
-        this.finhor2.initNormalVizBuffers();
-        this.finvert1.initNormalVizBuffers();
-        this.finvert2.initNormalVizBuffers();
+        this.finhor.initNormalVizBuffers();
+        this.finvert.initNormalVizBuffers();
         this.flag.initNormalVizBuffers();
 
     }
@@ -97,8 +92,7 @@ class MyVehicle extends CGFobject {
                 //console.log("Deu uma volta. Tempo = " + this.autopilotTime);
                 this.angle_y = this.angle_y % 360;
             }
-            this.finvert1.setAngle(-this.speed*5);
-            this.finvert2.setAngle(-this.speed*5);
+            this.finvert.setAngle(-this.speed*5);
             this.x_pos = -this.radius * Math.cos(this.angle_mov) + this.center_x;
             this.z_pos = this.radius * Math.sin(this.angle_mov) + this.center_z;
         }
@@ -113,8 +107,7 @@ class MyVehicle extends CGFobject {
     }
     turn(v) {
         this.angle_y += v;
-        this.finvert1.setAngle(-v*5);
-        this.finvert2.setAngle(-v*5);
+        this.finvert.setAngle(-v*5);
         
     }
 
@@ -256,24 +249,24 @@ class MyVehicle extends CGFobject {
 
         this.scene.pushMatrix();
         this.scene.translate(-0.35,0,-0.7);
-        this.finvert1.display();
+        this.finvert.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
         this.scene.translate(0.35,0,-0.7);
-        this.finvert2.display();
+        this.finvert.display();
         this.scene.popMatrix();
 
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
         this.scene.translate(-0.35,0,-0.7);
-        this.finhor1.display();
+        this.finhor.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
         this.scene.translate(0.35,0,-0.7);
-        this.finhor2.display();
+        this.finhor.display();
         this.scene.popMatrix();
 
         //Flag
@@ -281,7 +274,6 @@ class MyVehicle extends CGFobject {
         this.scene.translate(0,0,-1.8);
         this.flag.display();
         this.scene.popMatrix();
-
 
         this.scene.popMatrix();
 
