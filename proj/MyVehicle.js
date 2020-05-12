@@ -180,22 +180,26 @@ class MyVehicle extends CGFobject {
     
     display(){
         this.scene.setAmbient(0.5, 0.5, 0.5, 1);
+        this.scene.pushMatrix();
+        this.scene.translate(0, 10, 0);
+        this.scene.scale(this.scene.scaleFactor,this.scene.scaleFactor,this.scene.scaleFactor);
         
+
         this.scene.pushMatrix();
         this.scene.translate(this.x_pos, this.y_pos, this.z_pos);
         this.scene.rotate(this.angle_y*Math.PI/180.0, 0, 1, 0);
         //Blimp balloon
         this.scene.pushMatrix();
         this.body.apply();
-        this.scene.scale(0.5,0.5,1);
+        this.scene.scale(1,1,2);
         this.sphere.display();
         this.scene.popMatrix();
         
         //Cockpit
         this.scene.pushMatrix();
         this.cockpit.apply();
-        this.scene.translate(0,-0.5,0);
-        this.scene.scale(0.10,0.10,0.6);
+        this.scene.translate(0,-1,0);
+        this.scene.scale(0.20,0.20,1.2);
         this.scene.translate(0,0,-0.5);
         this.scene.rotate(90.0*Math.PI/180.0, 1, 0, 0);
         this.cylinder.display();
@@ -203,41 +207,41 @@ class MyVehicle extends CGFobject {
 
         //Ends of the cockpit
         this.scene.pushMatrix();
-        this.scene.translate(0,-0.5,0.3);
-        this.scene.scale(0.10,0.10,0.10);
+        this.scene.translate(0,-1,0.6);
+        this.scene.scale(0.20,0.20,0.20);
         this.sphere.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
-        this.scene.translate(0,-0.5,-0.3);
-        this.scene.scale(0.10,0.10,0.10);
+        this.scene.translate(0,-1,-0.6);
+        this.scene.scale(0.20,0.20,0.20);
         this.sphere.display();
         this.scene.popMatrix();
 
         //Engine
         this.scene.pushMatrix();
         this.helixes.apply();
-        this.scene.translate(0.09,-0.51,-0.37);
-        this.scene.scale(0.025,0.025,0.05);
+        this.scene.translate(0.18,-1.02,-0.74);
+        this.scene.scale(0.05,0.05,0.1);
         this.sphere.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
         this.helixes.apply();
-        this.scene.translate(0.09,-0.51,-0.42);
+        this.scene.translate(0.18,-1.02,-0.84);
         this.propeller1.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
         this.helixes.apply();
-        this.scene.translate(-0.09,-0.51,-0.37);
-        this.scene.scale(0.025,0.025,0.05);
+        this.scene.translate(-0.18,-1.02,-0.74);
+        this.scene.scale(0.05,0.05,0.1);
         this.sphere.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
         this.helixes.apply();
-        this.scene.translate(-0.09,-0.51,-0.42);
+        this.scene.translate(-0.18,-1.02,-0.84);
         this.propeller2.display();
         this.scene.popMatrix();
 
@@ -245,6 +249,7 @@ class MyVehicle extends CGFobject {
         //Flight Control Surfaces
         this.cockpit.apply();
         this.scene.pushMatrix();
+        this.scene.scale(2,2,2);
         this.scene.rotate(90.0*Math.PI/180.0, 0, 0, 1);
 
         this.scene.pushMatrix();
@@ -258,7 +263,7 @@ class MyVehicle extends CGFobject {
         this.scene.popMatrix();
 
         this.scene.popMatrix();
-
+        this.scene.scale(2,2,2);
         this.scene.pushMatrix();
         this.scene.translate(-0.35,0,-0.7);
         this.finhor.display();
@@ -275,6 +280,7 @@ class MyVehicle extends CGFobject {
         this.flag.display();
         this.scene.popMatrix();
 
+        this.scene.popMatrix();
         this.scene.popMatrix();
 
     }

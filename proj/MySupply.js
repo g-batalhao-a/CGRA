@@ -15,7 +15,7 @@ class MySupply extends CGFobject {
         this.box = new MyBox(this.scene);
         this.state=SupplyStates.INACTIVE;
         this.x_pos=0;
-        this.y_pos=9;
+        this.y_pos=8.5;
         this.z_pos=0;
         this.dropTime=0;
     }

@@ -186,7 +186,6 @@ class MyScene extends CGFscene {
         for (var i=0 ; i<5; i++){
             this.supplies[i].update(t);
         }
-        //To be done...
     }
 
     updateComplexity(){
@@ -237,9 +236,7 @@ class MyScene extends CGFscene {
         }
 
         if(this.displayVehicle){
-            this.pushMatrix();
-            this.translate(0, 10, 0);
-            this.scale(this.scaleFactor,this.scaleFactor,this.scaleFactor);
+            
             this.vehicle.display();
             this.popMatrix();
         }
