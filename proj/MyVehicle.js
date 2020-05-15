@@ -101,8 +101,8 @@ class MyVehicle extends CGFobject {
             this.z_pos += this.speed * Math.cos(this.angle_y*Math.PI/180);
         }
         
-        this.propeller1.setAngle(this.speed*t);
-        this.propeller2.setAngle(-this.speed*t);
+        this.propeller1.setAngle(this.speed*t*2.0);
+        this.propeller2.setAngle(-this.speed*t*2.0);
         this.flag.update(this.speed,this.time,this.accel);
     }
     turn(v) {

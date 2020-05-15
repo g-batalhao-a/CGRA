@@ -45,7 +45,7 @@ class MyScene extends CGFscene {
         };
 
         //Objects connected to MyInterface
-        this.displayAxis = true;
+        this.displayAxis = false;
         this.displayObject = true;
         this.displayNormals = false;
         this.displayVehicle=true;
@@ -74,7 +74,7 @@ class MyScene extends CGFscene {
         ];
         this.textureList={
             'Earth':0,
-            'Cubemap':1,
+            'Jungle':1,
             'Desert':2,
         };
 

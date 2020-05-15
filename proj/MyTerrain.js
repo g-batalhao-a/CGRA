@@ -9,20 +9,26 @@ class MyTerrain extends CGFobject {
         this.plane.initBuffers();
         
         this.shader=new CGFshader(this.scene.gl, "shaders/terrain.vert", "shaders/terrain.frag");
-        this.texture=new CGFtexture(this.scene,'images/mountain1.jpg');
+        this.texture1=new CGFtexture(this.scene,'images/mountain1.jpg');
+        this.texture2=new CGFtexture(this.scene,'images/desert.jpg');
         this.map=new CGFtexture(this.scene,'images/heightmap1.jpg');
         
         this.shader.setUniformsValues({ uSampler1: 1 });
         this.shader.setUniformsValues({ uSampler2: 2 });
+
+        
         
         
     }
-    
     display(){
         
-        
         this.scene.setActiveShader(this.shader);
-        this.texture.bind(1);
+        if(this.scene.currentTexture==1){
+            this.texture1.bind(1);
+        }
+        else{
+            this.texture2.bind(1);
+        }
         this.map.bind(2);
 
         this.scene.pushMatrix();

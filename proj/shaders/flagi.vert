@@ -21,8 +21,14 @@ void main() {
 
     vec3 offset=vec3(0.0,0.0,0.0);
 
-    if (acceleration >= 0.0)
-        offset.z -= cos((-aVertexPosition.x + timeFactor + speed) * 3.0) * 0.5 * (-aVertexPosition.x - 0.5);
+    
+    if (acceleration >= 0.0){
+        if(speed==0.0)
+            offset.z -= cos((-aVertexPosition.x + timeFactor)* 3.0) * 0.5 * (-aVertexPosition.x - 0.5);
+        else
+            offset.z -= cos((-aVertexPosition.x + timeFactor*speed*7.0)* 3.0) * 0.5 * (-aVertexPosition.x - 0.5);
+    }
+        
     else
         offset.z -= cos((-aVertexPosition.x + timeFactor - speed) * 3.0) * 0.5 * (-aVertexPosition.x - 0.5);
 
