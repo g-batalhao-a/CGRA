@@ -14,11 +14,7 @@ class MyTerrain extends CGFobject {
         this.map=new CGFtexture(this.scene,'images/heightmap1.jpg');
         
         this.shader.setUniformsValues({ uSampler1: 1 });
-        this.shader.setUniformsValues({ uSampler2: 2 });
-
-        
-        
-        
+        this.shader.setUniformsValues({ uSampler2: 2 }); 
     }
     display(){
         
@@ -39,8 +35,6 @@ class MyTerrain extends CGFobject {
         this.plane.display();
 
         this.scene.popMatrix();
-        // restore default shader (will be needed for drawing the axis in next frame)
-		this.scene.setActiveShader(this.scene.defaultShader);
     }
 
 }

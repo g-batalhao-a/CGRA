@@ -26,15 +26,11 @@ class MySupply extends CGFobject {
         this.elapsedTime = (t / 1000 % 1000) - this.time;
         this.time = t / 1000 % 1000;
         
-        if(this.state==SupplyStates.FALLING){
-            this.dropTime+=this.elapsedTime;
-            this.y_pos-=(this.elapsedTime*(8.5/3.0));
-            if(this.y_pos<=0.5){
+        if (this.state == SupplyStates.FALLING){
+            this.dropTime += this.elapsedTime;
+            this.y_pos -= (this.elapsedTime * (8.5/3.0));
+            if(this.y_pos <= 0.5)
                 this.land();
-                //console.log(this.dropTime);
-            }
-                
-            
         }
     }
     dropSupply(x,z){

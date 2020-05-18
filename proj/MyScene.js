@@ -56,6 +56,7 @@ class MyScene extends CGFscene {
         this.speedFactor=1;
         this.scaleFactor=1;
         this.dropCooldown = 0;
+        
         //Material
         this.material=new CGFappearance(this);
         this.material.setAmbient(0.7,0.7,0.7,1);
@@ -106,15 +107,15 @@ class MyScene extends CGFscene {
         this.objects[this.currentObject];
     }
     updateTexture(){
-        if(this.currentObject!=2)
+        if(this.currentObject != 2 && this.currentTexture == 0)
             this.material.setTexture(this.textures[this.currentTexture]);
         else{
             this.objects[this.currentObject].updateTexture();
         }
     }
     checkKeys(t){
-        var text="Keys pressed: ";
-        var keysPressed=false;
+        var text = "Keys pressed: ";
+        var keysPressed = false;
 
         if(this.gui.isKeyPressed("KeyP")){
             text+=" P ";
@@ -146,7 +147,9 @@ class MyScene extends CGFscene {
         
         if (this.gui.isKeyPressed("KeyR")) {
             text+=" R "
+            // Reset Vehicle
             this.vehicle.reset();
+            // Reset Supplies
             this.nSupply=0;
             for(var i=0;i<5;i++){
                 this.supplies[i].state=SupplyStates.INACTIVE;
@@ -219,9 +222,6 @@ class MyScene extends CGFscene {
 
         // ---- BEGIN Primitive drawing section
         this.pushMatrix();
-
-        
-        
         
         //This sphere does not have defined texture coordinates
         //this.incompleteSphere.display();
@@ -236,9 +236,8 @@ class MyScene extends CGFscene {
         }
 
         if(this.displayVehicle){
-            
             this.vehicle.display();
-            this.popMatrix();
+            //this.popMatrix();
         }
 
         for (var i=0 ; i<5; i++){
@@ -247,13 +246,12 @@ class MyScene extends CGFscene {
         
         
         if(this.displayTerrain){
+            this.billboard.display();
             this.terrain.display();
         }
-
-        this.billboard.display();
-        
         
         this.popMatrix();
+        
         // ---- END Primitive drawing section
         this.setActiveShader(this.defaultShader);
     }

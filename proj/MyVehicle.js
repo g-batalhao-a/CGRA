@@ -68,7 +68,7 @@ class MyVehicle extends CGFobject {
     }
     updateBuffers(complexity){
         this.slices = 3 + Math.round(9 * complexity); //complexity varies 0-10, so slices varies 3-93
-        this.stacks = 3 + Math.round(9*complexity);
+        this.stacks = 3 + Math.round(9 * complexity);
         this.sphere.updateSlices(this.slices);
         this.sphere.updateStacks(this.stacks);
         this.cylinder.updateSlices(this.slices);
@@ -89,7 +89,6 @@ class MyVehicle extends CGFobject {
             this.angle_mov=this.autopilotTime*this.speed;
             this.angle_y = this.angle_y + this.elapsedTime*360/5;
             if (this.angle_y > 360) {
-                //console.log("Deu uma volta. Tempo = " + this.autopilotTime);
                 this.angle_y = this.angle_y % 360;
             }
             this.finvert.setAngle(-this.speed*5);
