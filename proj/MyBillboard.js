@@ -16,7 +16,7 @@ class MyBillboard extends CGFobject {
         this.texture.setSpecular(0.1, 0.1, 0.1, 1);
         this.texture.setShininess(10.0);
         this.texture.loadTexture('images/billboard.png');
-        this.texture.setTextureWrap('REPEAT', 'REPEAT');
+        this.texture.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
 
         this.texture_supp=new CGFappearance(this.scene)
         this.texture_supp.setAmbient(0.9, 0.9, 0.9, 1);

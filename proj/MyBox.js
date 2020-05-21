@@ -18,7 +18,7 @@ class MyBox extends CGFobject {
         this.wooden.setSpecular(0.1, 0.1, 0.1, 1);
         this.wooden.setShininess(10.0);
         this.wooden.loadTexture('images/wood.png');
-        this.wooden.setTextureWrap('REPEAT', 'REPEAT');
+        this.wooden.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
 
         //wooden material
         this.land = new CGFappearance(scene);
@@ -27,7 +27,7 @@ class MyBox extends CGFobject {
         this.land.setSpecular(0.1, 0.1, 0.1, 1);
         this.land.setShininess(10.0);
         this.land.loadTexture('images/box_land.png');
-        this.land.setTextureWrap('REPEAT', 'REPEAT');
+        this.land.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
     }
 	display(landed) {
         this.scene.pushMatrix();

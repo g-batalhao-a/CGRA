@@ -46,7 +46,7 @@ class MyVehicle extends CGFobject {
         this.body.setDiffuse(0.2,0.2,0.2,1);
         this.body.setShininess(10);
         this.body.loadTexture('images/blimp_body.png');
-        this.body.setTextureWrap('REPEAT','REPEAT');
+        this.body.setTextureWrap('CLAMP_TO_EDGE','CLAMP_TO_EDGE');
 
         this.cockpit=new CGFappearance(this.scene);
         this.cockpit.setAmbient(0.7,0.7,0.7,1);
@@ -54,7 +54,7 @@ class MyVehicle extends CGFobject {
         this.cockpit.setDiffuse(0.2,0.2,0.2,1);
         this.cockpit.setShininess(10);
         this.cockpit.loadTexture('images/cockpit.png');
-        this.cockpit.setTextureWrap('REPEAT','REPEAT');
+        this.cockpit.setTextureWrap('CLAMP_TO_EDGE','CLAMP_TO_EDGE');
 
         this.helixes=new CGFappearance(this.scene);
         this.helixes.setAmbient(0.7,0.7,0.7,1);
@@ -62,7 +62,7 @@ class MyVehicle extends CGFobject {
         this.helixes.setDiffuse(0.2,0.2,0.2,1);
         this.helixes.setShininess(10);
         this.helixes.loadTexture('images/helixes.png');
-        this.helixes.setTextureWrap('REPEAT','REPEAT');
+        this.helixes.setTextureWrap('CLAMP_TO_EDGE','CLAMP_TO_EDGE');
 
 
     }

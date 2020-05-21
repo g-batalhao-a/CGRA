@@ -17,7 +17,7 @@ class MyUnitCubeQuad extends CGFobject {
         this.left.setSpecular(0.1, 0.1, 0.1, 1);
         this.left.setShininess(10.0);
         this.left.loadTexture('images/split_cubemap/left.png');
-        this.left.setTextureWrap('REPEAT', 'REPEAT');
+        this.left.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
 
         //right material
         this.right = new CGFappearance(scene);
@@ -26,7 +26,7 @@ class MyUnitCubeQuad extends CGFobject {
         this.right.setSpecular(0.0, 0.0, 0.0, 1);
         this.right.setShininess(10.0);
         this.right.loadTexture('images/split_cubemap/right.png');
-        this.right.setTextureWrap('REPEAT', 'REPEAT');
+        this.right.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
         
         //front material
         this.front = new CGFappearance(scene);
@@ -35,7 +35,7 @@ class MyUnitCubeQuad extends CGFobject {
         this.front.setSpecular(0.0, 0.0, 0.0, 1);
         this.front.setShininess(10.0);
         this.front.loadTexture('images/split_cubemap/front.png');
-        this.front.setTextureWrap('REPEAT', 'REPEAT');
+        this.front.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
 
         //back material
         this.back = new CGFappearance(scene);
@@ -44,7 +44,7 @@ class MyUnitCubeQuad extends CGFobject {
         this.back.setSpecular(0.0, 0.0, 0.0, 1);
         this.back.setShininess(10.0);
         this.back.loadTexture('images/split_cubemap/back.png');
-        this.back.setTextureWrap('REPEAT', 'REPEAT');
+        this.back.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
 
         //top material
         this.top = new CGFappearance(scene);
@@ -53,7 +53,7 @@ class MyUnitCubeQuad extends CGFobject {
         this.top.setSpecular(0.0, 0.0, 0.0, 1);
         this.top.setShininess(10.0);
         this.top.loadTexture('images/split_cubemap/top.png');
-        this.top.setTextureWrap('REPEAT', 'REPEAT');
+        this.top.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
 
         //bottom material
         this.bot = new CGFappearance(scene);
@@ -62,7 +62,7 @@ class MyUnitCubeQuad extends CGFobject {
         this.bot.setSpecular(0.0, 0.0, 0.0, 1);
         this.bot.setShininess(10.0);
         this.bot.loadTexture('images/split_cubemap/bottom.png');
-        this.bot.setTextureWrap('REPEAT', 'REPEAT');
+        this.bot.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
     }
 	display() {
         this.scene.pushMatrix();
