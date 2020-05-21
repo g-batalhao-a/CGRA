@@ -94,15 +94,19 @@ class MyVehicle extends CGFobject {
             this.finvert.setAngle(-this.speed*5);
             this.x_pos = -this.radius * Math.cos(this.angle_mov) + this.center_x;
             this.z_pos = this.radius * Math.sin(this.angle_mov) + this.center_z;
+            this.propeller1.setAngle(this.speed/5*t*2.0);
+            this.propeller2.setAngle(-this.speed/5*t*2.0);
+            this.flag.update(this.speed/5,this.time,this.accel);
         }
         else{
             this.x_pos += this.speed * Math.sin(this.angle_y*Math.PI/180);
             this.z_pos += this.speed * Math.cos(this.angle_y*Math.PI/180);
+            this.propeller1.setAngle(this.speed*t*2.0);
+            this.propeller2.setAngle(-this.speed*t*2.0);
+            this.flag.update(this.speed,this.time,this.accel);
         }
         
-        this.propeller1.setAngle(this.speed*t*2.0);
-        this.propeller2.setAngle(-this.speed*t*2.0);
-        this.flag.update(this.speed,this.time,this.accel);
+        
     }
     turn(v) {
         this.angle_y += v;
@@ -174,6 +178,10 @@ class MyVehicle extends CGFobject {
                 
             }
             
+        }
+        else{
+            this.automatic=false;
+            this.speed=this.speed/4;
         }
     }
     
