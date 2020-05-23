@@ -17,7 +17,7 @@ class MyBox extends CGFobject {
         this.wooden.setDiffuse(0.1, 0.1, 0.1, 1);
         this.wooden.setSpecular(0.1, 0.1, 0.1, 1);
         this.wooden.setShininess(10.0);
-        this.wooden.loadTexture('images/wood.png');
+        this.wooden.loadTexture('images/vehicle/wood.png');
         this.wooden.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
 
         //wooden material
@@ -26,7 +26,7 @@ class MyBox extends CGFobject {
         this.land.setDiffuse(0.1, 0.1, 0.1, 1);
         this.land.setSpecular(0.1, 0.1, 0.1, 1);
         this.land.setShininess(10.0);
-        this.land.loadTexture('images/box_land.png');
+        this.land.loadTexture('images/vehicle/box_land.png');
         this.land.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
     }
 	display(landed) {

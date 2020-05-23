@@ -16,7 +16,7 @@ class MyUnitCubeQuad extends CGFobject {
         this.left.setDiffuse(0.1, 0.1, 0.1, 1);
         this.left.setSpecular(0.1, 0.1, 0.1, 1);
         this.left.setShininess(10.0);
-        this.left.loadTexture('images/split_cubemap/left.png');
+        this.left.loadTexture('images/landscape/split_cubemap/left.png');
         this.left.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
 
         //right material
@@ -25,7 +25,7 @@ class MyUnitCubeQuad extends CGFobject {
         this.right.setDiffuse(0.0, 0.0, 0.0, 1);
         this.right.setSpecular(0.0, 0.0, 0.0, 1);
         this.right.setShininess(10.0);
-        this.right.loadTexture('images/split_cubemap/right.png');
+        this.right.loadTexture('images/landscape/split_cubemap/right.png');
         this.right.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
         
         //front material
@@ -34,7 +34,7 @@ class MyUnitCubeQuad extends CGFobject {
         this.front.setDiffuse(0.0, 0.0, 0.0, 1);
         this.front.setSpecular(0.0, 0.0, 0.0, 1);
         this.front.setShininess(10.0);
-        this.front.loadTexture('images/split_cubemap/front.png');
+        this.front.loadTexture('images/landscape/split_cubemap/front.png');
         this.front.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
 
         //back material
@@ -43,7 +43,7 @@ class MyUnitCubeQuad extends CGFobject {
         this.back.setDiffuse(0.0, 0.0, 0.0, 1);
         this.back.setSpecular(0.0, 0.0, 0.0, 1);
         this.back.setShininess(10.0);
-        this.back.loadTexture('images/split_cubemap/back.png');
+        this.back.loadTexture('images/landscape/split_cubemap/back.png');
         this.back.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
 
         //top material
@@ -52,7 +52,7 @@ class MyUnitCubeQuad extends CGFobject {
         this.top.setDiffuse(0.0, 0.0, 0.0, 1);
         this.top.setSpecular(0.0, 0.0, 0.0, 1);
         this.top.setShininess(10.0);
-        this.top.loadTexture('images/split_cubemap/top.png');
+        this.top.loadTexture('images/landscape/split_cubemap/top.png');
         this.top.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
 
         //bottom material
@@ -61,7 +61,7 @@ class MyUnitCubeQuad extends CGFobject {
         this.bot.setDiffuse(0.0, 0.0, 0.0, 1);
         this.bot.setSpecular(0.0, 0.0, 0.0, 1);
         this.bot.setShininess(10.0);
-        this.bot.loadTexture('images/split_cubemap/bottom.png');
+        this.bot.loadTexture('images/landscape/split_cubemap/bottom.png');
         this.bot.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
     }
 	display() {
@@ -125,21 +125,21 @@ class MyUnitCubeQuad extends CGFobject {
         this.quad.disableNormalViz();
     }
     updateTexture(){
-        if(this.scene.currentTexture==1){
-            this.left.loadTexture('images/split_cubemap/left.png');
-            this.right.loadTexture('images/split_cubemap/right.png');
-            this.front.loadTexture('images/split_cubemap/front.png');
-            this.back.loadTexture('images/split_cubemap/back.png');
-            this.top.loadTexture('images/split_cubemap/top.png');
-            this.bot.loadTexture('images/split_cubemap/bottom.png');
+        if(this.scene.currentTexture==0){
+            this.left.loadTexture('images/landscape/split_cubemap/left.png');
+            this.right.loadTexture('images/landscape/split_cubemap/right.png');
+            this.front.loadTexture('images/landscape/split_cubemap/front.png');
+            this.back.loadTexture('images/landscape/split_cubemap/back.png');
+            this.top.loadTexture('images/landscape/split_cubemap/top.png');
+            this.bot.loadTexture('images/landscape/split_cubemap/bottom.png');
         }
-        else if(this.scene.currentTexture==2){
-            this.left.loadTexture('images/split_desertmap/left_desert.png');
-            this.right.loadTexture('images/split_desertmap/right_desert.png');
-            this.front.loadTexture('images/split_desertmap/front_desert.png');
-            this.back.loadTexture('images/split_desertmap/back_desert.png');
-            this.top.loadTexture('images/split_desertmap/top_desert.png');
-            this.bot.loadTexture('images/split_desertmap/bottom_desert.png');
+        else if(this.scene.currentTexture==1){
+            this.left.loadTexture('images/landscape/split_desertmap/left_desert.png');
+            this.right.loadTexture('images/landscape/split_desertmap/right_desert.png');
+            this.front.loadTexture('images/landscape/split_desertmap/front_desert.png');
+            this.back.loadTexture('images/landscape/split_desertmap/back_desert.png');
+            this.top.loadTexture('images/landscape/split_desertmap/top_desert.png');
+            this.bot.loadTexture('images/landscape/split_desertmap/bottom_desert.png');
         }
     }
 }

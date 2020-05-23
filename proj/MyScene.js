@@ -50,7 +50,7 @@ class MyScene extends CGFscene {
         this.displayNormals = false;
         this.displayVehicle=true;
         this.displayTerrain=true;
-        this.currentTexture=2;
+        this.currentTexture=0;
         this.currentObject=2;
         this.complexity=0.0;
         this.speedFactor=1;
@@ -63,7 +63,7 @@ class MyScene extends CGFscene {
         this.material.setDiffuse(0.9,0.9,0.9,1);
         this.material.setDiffuse(0.2,0.2,0.2,1);
         this.material.setShininess(10);
-        this.material.loadTexture('images/earth.jpg');
+        this.material.loadTexture('images/landscape/earth.jpg');
         this.material.setTextureWrap('CLAMP_TO_EDGE','CLAMP_TO_EDGE');
 
         //Textures
@@ -74,9 +74,8 @@ class MyScene extends CGFscene {
             new CGFtexture(this,'images/heightmap.jpg'),
         ];
         this.textureList={
-            'Earth':0,
-            'Jungle':1,
-            'Desert':2,
+            'Jungle':0,
+            'Desert':1,
         };
 
         this.supplies=[];
@@ -107,11 +106,7 @@ class MyScene extends CGFscene {
         this.objects[this.currentObject];
     }
     updateTexture(){
-        if(this.currentObject != 2 && this.currentTexture == 0)
-            this.material.setTexture(this.textures[this.currentTexture]);
-        else{
-            this.objects[this.currentObject].updateTexture();
-        }
+            this.objects[2].updateTexture();
     }
     checkKeys(t){
         var text = "Keys pressed: ";

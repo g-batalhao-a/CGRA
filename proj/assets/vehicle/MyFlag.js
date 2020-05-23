@@ -10,7 +10,7 @@ class MyFlag extends CGFobject {
         this.support=new MyQuadDSided(this.scene);
         this.shader=new CGFshader(this.scene.gl, "shaders/flag.vert", "shaders/flag.frag");
         this.shader_inverted = new CGFshader(this.scene.gl, "shaders/flagi.vert", "shaders/flag.frag");
-        this.texture=new CGFtexture(this.scene,'images/flag.png');
+        this.texture=new CGFtexture(this.scene,'images/vehicle/flag.png');
 
         this.shader.setUniformsValues({ uSampler1: 1 });
         this.shader.setUniformsValues({ speed: 0 });
@@ -33,9 +33,10 @@ class MyFlag extends CGFobject {
     }
     display(){
         
-        this.scene.pushMatrix();
+        //this.scene.pushMatrix();
         
-        this.scene.setActiveShader(this.scene.defaultShader);
+        //this.scene.setActiveShader(this.scene.defaultShader);
+
         this.scene.pushMatrix();
         this.scene.translate(0,-0.107,0.47);
         this.scene.rotate(75.0*Math.PI/180.0,1,0,0);
@@ -53,10 +54,12 @@ class MyFlag extends CGFobject {
         this.scene.popMatrix();
         
         this.scene.setActiveShader(this.shader);
+        this.texture.bind(1);
+        this.scene.pushMatrix();
         this.scene.scale(1,0.5,1);
 
         
-        this.texture.bind(1);
+        
         this.scene.pushMatrix();
         this.scene.translate(0,0,-0.5);
         this.scene.rotate(-90.0*Math.PI/180.0, 0, 1, 0);
@@ -69,7 +72,7 @@ class MyFlag extends CGFobject {
         this.scene.rotate(90.0*Math.PI/180.0, 0, 1, 0);
         this.f.display();
         this.scene.popMatrix(); 
-
+        this.scene.setActiveShader(this.scene.defaultShader);
         this.scene.popMatrix(); 
         this.scene.setActiveShader(this.scene.defaultShader);
     }
