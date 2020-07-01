@@ -1,0 +1,10 @@
+Turma 6 - Grupo 7
+
+Gonçalo de Batalhão Alves - 201806451
+Pedro Jorge Fonseca Seixas - 201806227
+
+Notas sobre o Trabalho:
+É possível alterar a complexidade dos objetos que constituem o veículo, através do slider "Complexity". Também é possível alterar a complexidade dos obejtos "Sphere" e "Cylinder", através da seleção dos sliders "Number of Slices" e "Number of Stacks";
+É possível mostrar e esconder todos os objetos da cena, de modo a ser possível fazer uma análise mais detalhada de cada um;
+É possível alternar entre os objetos: "Sphere", "Cylinder" e "Cube" na opção "Object" da interface (Os dois primeiros objetos só têm a textura do planeta terra associada);
+É possível alterar a textura do "Terrain" e do "Cube", através da opção "Texture" da interface;
